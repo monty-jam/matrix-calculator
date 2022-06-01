@@ -3,4 +3,4 @@ project(semwork)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(semwork src/main.cpp src/Calculator/CCalculator.cpp src/Calculator/CCalculator.h src/Calculator/CEvaluator.cpp src/Calculator/CEvaluator.h src/Matrix/CMatrix.cpp src/Matrix/CMatrix.h src/Matrix/CMatrixDense.cpp src/Matrix/CMatrixDense.h src/Matrix/CMatrixSparse.cpp src/Matrix/CMatrixSparse.h)
+add_executable(semwork main.cpp Calculator/CCalculator.cpp Calculator/CCalculator.h Calculator/CEvaluator.cpp Calculator/CEvaluator.h Matrix/CMatrix.cpp Matrix/CMatrix.h Matrix/CMatrixDense.cpp Matrix/CMatrixDense.h Matrix/CMatrixSparse.cpp Matrix/CMatrixSparse.h)
