@@ -11,6 +11,8 @@ public:
 
 private:
     CEvaluator m_Evaluator;
+
+    void readInput();
 };
 
 

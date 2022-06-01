@@ -13,11 +13,11 @@ public:
     void Delete(const std::string &name);
     void Print(const std::string &name) const;
 
-    void Add(const std::string &lhs, const std::string &rhs);
-    void Subtract(const std::string &lhs, const std::string &rhs);
-    void Multiply(const std::string &lhs, const std::string &rhs);
+    void Add(const std::string &name, const std::string &lhs, const std::string &rhs);
+    void Subtract(const std::string &name, const std::string &lhs, const std::string &rhs);
+    void Multiply(const std::string &name, const std::string &lhs, const std::string &rhs);
     void Transpose(const std::string &name);
-    void Merge(const std::string &lhs, const std::string &rhs);
+    void Merge(const std::string &name, const std::string &lhs, const std::string &rhs);
     void Cut(const std::string &name, unsigned int w, unsigned int h, unsigned int x, unsigned int y);
     void Inverse(const std::string &name);
     void Determinant(const std::string &name);
