@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/semwork.dir/src/main.cpp.o CMakeFiles/semwork.dir/src/Calculator/CCalculator.cpp.o CMakeFiles/semwork.dir/src/Calculator/CEvaluator.cpp.o CMakeFiles/semwork.dir/src/Matrix/CMatrix.cpp.o CMakeFiles/semwork.dir/src/Matrix/CMatrixDense.cpp.o CMakeFiles/semwork.dir/src/Matrix/CMatrixSparse.cpp.o  -o semwork 
