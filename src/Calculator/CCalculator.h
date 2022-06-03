@@ -2,7 +2,10 @@
 #define SEMESTRAL_CCALCULATOR_H
 
 
-#include "CEvaluator.h"
+#include <string>
+#include <memory>
+#include <map>
+#include "../Command/CCommand.h"
 
 class CCalculator {
 public:
@@ -10,7 +13,9 @@ public:
     void run();
 
 private:
-    CEvaluator m_Evaluator;
+    std::map<std::string, std::shared_ptr<CCommand>> m_Commands;
+
+    std::map<std::string, std::shared_ptr<CMatrix>> m_Matrices;
 
     void readInput();
 };
