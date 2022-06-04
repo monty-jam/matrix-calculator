@@ -15,6 +15,8 @@ public:
 private:
     std::map<std::string, std::shared_ptr<CCommand>> m_Commands;
 
+    std::vector<std::shared_ptr<CCommand>> m_CommandList;
+
     std::map<std::string, std::shared_ptr<CMatrix>> m_Matrices;
 
     bool m_ExitFlag = false;

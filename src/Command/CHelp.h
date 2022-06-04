@@ -8,13 +8,13 @@
 
 class CHelp : public CCommand {
 public:
-    explicit CHelp(std::map<std::string, std::shared_ptr<CCommand>> &commands);
+    explicit CHelp(std::vector<std::shared_ptr<CCommand>> &commandList);
 
     void validate(const std::vector<std::string>& args) const override;
 
     void execute() override;
 private:
-    std::map<std::string, std::shared_ptr<CCommand>>& m_Commands;
+    std::vector<std::shared_ptr<CCommand>>& m_CommandList;
 };
 
 

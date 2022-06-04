@@ -5,7 +5,7 @@
 #include "../Command/CExit.h"
 
 CCalculator::CCalculator() {
-    addCommand(std::make_shared<CHelp>(m_Commands));
+    addCommand(std::make_shared<CHelp>(m_CommandList));
     addCommand(std::make_shared<CExit>(m_ExitFlag));
 }
 
@@ -36,6 +36,7 @@ void CCalculator::addCommand(const std::shared_ptr<CCommand>& command) {
     }
 
     m_Commands[command->getName()] = command;
+    m_CommandList.push_back(command);
 }
 
 std::vector<std::string> CCalculator::parseLine() const {
