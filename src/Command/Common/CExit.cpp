@@ -11,7 +11,7 @@ void CExit::validate(const std::vector<std::string> &args) const {
         throw std::invalid_argument("Invalid amount of arguments.");
 }
 
-void CExit::execute() {
+void CExit::execute(const std::vector<std::string> &args) {
     std::cout << "Bye Bye!" << std::endl;
     m_ExitFlag = true;
 }

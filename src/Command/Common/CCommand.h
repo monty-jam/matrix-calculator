@@ -4,7 +4,7 @@
 
 #include <string>
 #include <map>
-#include "../Matrix/CMatrix.h"
+#include "../../Matrix/CMatrix.h"
 
 class CCommand {
 public:
@@ -12,7 +12,7 @@ public:
 
     virtual void validate(const std::vector<std::string>& args) const = 0;
 
-    virtual void execute() = 0;
+    virtual void execute(const std::vector<std::string> &args) = 0;
 
     std::string getName() const;
 

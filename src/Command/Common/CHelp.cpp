@@ -11,7 +11,7 @@ void CHelp::validate(const std::vector<std::string>& args) const {
         throw std::invalid_argument("Invalid amount of arguments.");
 }
 
-void CHelp::execute() {
+void CHelp::execute(const std::vector<std::string> &args) {
     for (const auto& command : m_CommandList)
         std::cout << *command << std::endl;
 }

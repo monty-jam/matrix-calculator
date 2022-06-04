@@ -5,7 +5,7 @@
 #include <string>
 #include <memory>
 #include <map>
-#include "../Command/CCommand.h"
+#include "../Command/Common/CCommand.h"
 
 class CCalculator {
 public:

@@ -13,8 +13,8 @@ std::string CCommand::getName() const {
 }
 
 void CCommand::print(std::ostream &os) const {
-    os << format << std::endl;
-    os << '\t' << helpInfo;
+    os << '\t' << format << std::endl;
+    os << "\t\t" << helpInfo;
 }
 
 std::ostream &operator<<(std::ostream &os, const CCommand &cmd) {

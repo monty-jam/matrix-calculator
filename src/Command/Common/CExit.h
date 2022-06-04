@@ -10,7 +10,7 @@ public:
 
     void validate(const std::vector<std::string>& args) const override;
 
-    void execute() override;
+    void execute(const std::vector<std::string> &args) override;
 private:
     bool& m_ExitFlag;
 };
