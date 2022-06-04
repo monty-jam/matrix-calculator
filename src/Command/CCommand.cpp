@@ -8,9 +8,13 @@ CCommand::CCommand(std::string name, std::string format, std::string helpInfo)
           format(std::move(format)),
           helpInfo(std::move(helpInfo)) {}
 
+std::string CCommand::getName() const {
+    return name;
+}
+
 void CCommand::print(std::ostream &os) const {
     os << format << std::endl;
-    os << '\t' << helpInfo << std::endl;
+    os << '\t' << helpInfo;
 }
 
 std::ostream &operator<<(std::ostream &os, const CCommand &cmd) {

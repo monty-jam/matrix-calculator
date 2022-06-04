@@ -3,15 +3,18 @@
 
 
 #include <string>
+#include <map>
 #include "../Matrix/CMatrix.h"
 
 class CCommand {
 public:
     CCommand(std::string name, std::string format, std::string helpInfo);
 
-    virtual int validate(const std::string& line) const = 0;
+    virtual void validate(const std::vector<std::string>& args) const = 0;
 
-    virtual std::shared_ptr<CMatrix> execute() = 0;
+    virtual void execute() = 0;
+
+    std::string getName() const;
 
 protected:
     const std::string name;
@@ -23,7 +26,7 @@ protected:
     friend std::ostream &operator<<(std::ostream &os, const CCommand &cmd);
 };
 
-std::ostream &operator<<(std::ostream &os, const CCommand &x);
+std::ostream &operator<<(std::ostream &os, const CCommand &cmd);
 
 
 #endif //SEMWORK_CCOMMAND_H

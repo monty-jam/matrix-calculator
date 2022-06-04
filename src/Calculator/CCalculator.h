@@ -9,7 +9,7 @@
 
 class CCalculator {
 public:
-    CCalculator() = default;
+    CCalculator();
     void run();
 
 private:
@@ -17,7 +17,13 @@ private:
 
     std::map<std::string, std::shared_ptr<CMatrix>> m_Matrices;
 
-    void readInput();
+    bool m_ExitFlag = false;
+
+    std::string line;
+
+    void addCommand(const std::shared_ptr<CCommand>& command);
+
+    std::vector<std::string> parseLine() const;
 };
 
 
