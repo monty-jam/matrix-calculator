@@ -8,6 +8,7 @@
 #include "../Command/Read/CVars.h"
 #include "../Command/WriteMemory/CScan.h"
 #include "../Command/Read/CPrint.h"
+#include "../Command/WriteBasic/CAdd.h"
 
 CCalculator::CCalculator() {
     m_MakeShared["help"] = &CHelp::create; printInfo("help");
@@ -16,6 +17,7 @@ CCalculator::CCalculator() {
     m_MakeShared["print"] = &CPrint::create; printInfo("print");
 
     m_MakeShared["scan"] = &CScan::create; printInfo("scan");
+    m_MakeShared["+"] = &CAdd::create; printInfo("+");
 }
 
 void CCalculator::run() {

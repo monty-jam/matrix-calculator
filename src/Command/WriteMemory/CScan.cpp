@@ -41,11 +41,11 @@ void CScan::execute(const std::deque<std::string> &argv) {
 
             if (std::cin.fail()) {
                 std::cin.clear();
-                std::cin.ignore();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 throw std::invalid_argument("Invalid data type of the value.");
             }
 
-            if (fabs(val) < 0.01) val = 0;
+            if (fabs(val) < 0.0001) val = 0;
             if (val == 0) zeroes++;
 
             mtx[y].push_back(val);
