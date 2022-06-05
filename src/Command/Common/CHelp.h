@@ -4,17 +4,19 @@
 
 #include <map>
 #include <memory>
-#include "CCommand.h"
+#include "../CCommand.h"
+#include "../../Calculator/CMemory.h"
 
 class CHelp : public CCommand {
 public:
-    explicit CHelp(std::vector<std::shared_ptr<CCommand>> &commandList);
+    explicit CHelp(CMemory& memory);
 
-    void validate(const std::vector<std::string>& args) const override;
+    static std::shared_ptr<CCommand> create(CMemory& memory);
 
-    void execute(const std::vector<std::string> &args) override;
-private:
-    std::vector<std::shared_ptr<CCommand>>& m_CommandList;
+    void validate(const std::deque<std::string> &argv) const override;
+
+    void execute(const std::deque<std::string> &args) override;
+
 };
 
 

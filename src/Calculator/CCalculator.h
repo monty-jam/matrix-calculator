@@ -4,28 +4,27 @@
 
 #include <string>
 #include <memory>
-#include <map>
-#include "../Command/Common/CCommand.h"
+#include "CMemory.h"
+#include "CHistory.h"
 
 class CCalculator {
 public:
     CCalculator();
+
     void run();
 
 private:
-    std::map<std::string, std::shared_ptr<CCommand>> m_Commands;
+    std::map<std::string,
+            // Function pointer that returns a shared_ptr<CCommand> and takes CMemory&
+            std::shared_ptr<CCommand> (*)(CMemory &)> m_MakeShared;
 
-    std::vector<std::shared_ptr<CCommand>> m_CommandList;
+    CMemory m_Memory;
 
-    std::map<std::string, std::shared_ptr<CMatrix>> m_Matrices;
-
-    bool m_ExitFlag = false;
+    CHistory m_History;
 
     std::string line;
 
-    void addCommand(const std::shared_ptr<CCommand>& command);
-
-    std::vector<std::string> parseLine() const;
+    std::deque<std::string> parseLine() const;
 };
 
 

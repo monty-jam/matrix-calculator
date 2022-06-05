@@ -24,6 +24,8 @@ public:
 protected:
     unsigned int m_Width;
     unsigned int m_Height;
+    unsigned int m_Zeroes;
+    double m_Max;
 };
 
 

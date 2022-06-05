@@ -11,7 +11,6 @@ std::shared_ptr<CMatrix> CMatrix::operator+(const CMatrix &rhs) const {
             res.push_back(value);
         }
 
-
     return create(res);
 }
 
