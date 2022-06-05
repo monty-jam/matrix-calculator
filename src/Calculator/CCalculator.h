@@ -15,8 +15,8 @@ public:
 
 private:
     std::map<std::string,
-            // Function pointer that returns a shared_ptr<CCommand> and takes CMemory&
-            std::shared_ptr<CCommand> (*)(CMemory &)> m_MakeShared;
+            // Function pointer that returns a shared_ptr<CCommand> and takes CCalculator& and CMemory&
+            std::shared_ptr<CCommand> (*)(CCalculator &, CMemory &)> m_MakeShared;
 
     CMemory m_Memory;
 

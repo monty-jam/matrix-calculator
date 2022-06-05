@@ -10,14 +10,9 @@
 
 class CCommand {
 public:
-    CCommand(CMemory &memory);
-
     virtual void validate(const std::deque<std::string> &argv) const = 0;
 
     virtual void execute(const std::deque<std::string> &argv) = 0;
-
-protected:
-    CMemory& m_Memory;
 
 };
 

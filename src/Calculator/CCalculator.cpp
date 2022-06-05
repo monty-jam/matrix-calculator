@@ -30,7 +30,7 @@ void CCalculator::run() {
 
         try {
             auto makeShared = m_MakeShared.at(argv[0]);
-            std::shared_ptr<CCommand> command = makeShared(m_Memory);
+            std::shared_ptr<CCommand> command = makeShared(*this, m_Memory);
             argv.pop_front();
             command->validate(argv);
             command->execute(argv);

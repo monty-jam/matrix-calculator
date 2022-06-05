@@ -2,13 +2,13 @@
 #include <deque>
 #include "CHelp.h"
 
-CHelp::CHelp(CMemory& memory)
-        : CCommand(memory) {}
+CHelp::CHelp(CCalculator& calculator, CMemory& memory)
+        : m_Calculator(calculator), m_Memory(memory) {}
 
-std::shared_ptr<CCommand> CHelp::create(CMemory& memory) {
+std::shared_ptr<CCommand> CHelp::create(CCalculator& calculator, CMemory& memory) {
     memory.addCommandInfo("help",
                           "print information about all available commands");
-    return std::make_shared<CHelp>(memory);
+    return std::make_shared<CHelp>(calculator, memory);
 }
 
 void CHelp::validate(const std::deque<std::string> &argv) const {
