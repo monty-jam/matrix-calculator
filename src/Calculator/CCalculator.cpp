@@ -7,11 +7,14 @@
 #include "../Command/Read/CExit.h"
 #include "../Command/Read/CVars.h"
 #include "../Command/WriteMemory/CScan.h"
+#include "../Command/Read/CPrint.h"
 
 CCalculator::CCalculator() {
     m_MakeShared["help"] = &CHelp::create; printInfo("help");
     m_MakeShared["exit"] = &CExit::create; printInfo("exit");
     m_MakeShared["vars"] = &CVars::create; printInfo("vars");
+    m_MakeShared["print"] = &CPrint::create; printInfo("print");
+
     m_MakeShared["scan"] = &CScan::create; printInfo("scan");
 }
 
@@ -26,6 +29,8 @@ void CCalculator::run() {
             continue;
 
         try {
+            if (m_MakeShared.find(argv[0]) == m_MakeShared.end())
+                throw std::invalid_argument("Unknown command.");
             std::shared_ptr<CCommand> command = m_MakeShared.at(argv[0])(*this, m_Memory);
 
             argv.pop_front();

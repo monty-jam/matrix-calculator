@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
 #include "CScan.h"
 #include "../../Matrix/CMatrixSparse.h"
 #include "../../Matrix/CMatrixDense.h"
@@ -32,7 +33,6 @@ void CScan::execute(const std::deque<std::string> &argv) {
 
     std::vector<std::vector<double>> mtx(height);
     int zeroes = 0;
-    int amount = width * height;
     double val;
 
     for (int y = 0; y < height; ++y)
@@ -50,10 +50,11 @@ void CScan::execute(const std::deque<std::string> &argv) {
 
             mtx[y].push_back(val);
         }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     // Create result
     std::shared_ptr<CMatrix> result;
-    if (zeroes > amount / 2)
+    if (zeroes > width * height / 2)
         result = std::make_shared<CMatrixSparse>(width, height, zeroes, mtx);
     else
         result = std::make_shared<CMatrixDense>(width, height, zeroes, mtx);

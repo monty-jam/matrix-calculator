@@ -1,9 +1,21 @@
+#include <iostream>
+#include <iomanip>
 #include "CMatrix.h"
+#include "CMatrixDense.h"
+#include "CMatrixSparse.h"
 
-CMatrix::CMatrix(unsigned int width, unsigned int height, unsigned int zeroes) : m_Width(width), m_Height(height),
+CMatrix::CMatrix(unsigned width, unsigned height, unsigned zeroes) : m_Width(width), m_Height(height),
                                                                                 m_Zeroes(zeroes) {}
 
-CMatrix::~CMatrix() {};
+CMatrix::~CMatrix() = default;
+
+std::shared_ptr<CMatrix> CMatrix::decider(unsigned width, unsigned height, unsigned zeroes,
+                                        const std::vector<std::vector<double>>& mtx) const {
+    if (zeroes > width * height / 2)
+        return std::make_shared<CMatrixDense>(width, height, zeroes, mtx);
+    else
+        return std::make_shared<CMatrixSparse>(width, height, zeroes, mtx);
+}
 
 //std::shared_ptr<CMatrix> CMatrix::operator+(const CMatrix &rhs) const {
 //    if (m_Width != rhs.m_Width || m_Height != rhs.m_Height)
@@ -49,6 +61,16 @@ CMatrix::~CMatrix() {};
 //    return create(res);
 //}
 
+void CMatrix::print(std::ostream &os) const {
+    for (int y = 0; y < m_Height; ++y) {
+        for (int x = 0; x < m_Width; ++x) {
+            os << std::setw(5) << at(x, y) << " ";
+        }
+        os << std::endl;
+    }
+}
+
 std::ostream &operator<<(std::ostream &os, const CMatrix &mtx) {
+    mtx.print(os);
     return os;
 }
