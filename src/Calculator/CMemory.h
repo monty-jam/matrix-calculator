@@ -12,6 +12,8 @@ class CMemory {
 public:
     CMemory();
 
+    std::set<std::string> getCommandNames() const;
+
     std::string getCommandInfo() const;
 
     const std::map<std::string, std::shared_ptr<CMatrix>>& getMatrices() const;
@@ -19,6 +21,10 @@ public:
     void addCommandName(const std::string& name);
 
     void addCommandInfo(const std::string& format, const std::string& helpInfo);
+
+    void addMatrix(const std::string& name, std::shared_ptr<CMatrix> mtx);
+
+    void deleteMatrix(const std::string& name);
 
 private:
     std::set<std::string> m_CommandNames;

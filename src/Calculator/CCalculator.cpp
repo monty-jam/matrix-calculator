@@ -6,11 +6,13 @@
 #include "../Command/Read/CHelp.h"
 #include "../Command/Read/CExit.h"
 #include "../Command/Read/CVars.h"
+#include "../Command/WriteMemory/CScan.h"
 
 CCalculator::CCalculator() {
     m_MakeShared["help"] = &CHelp::create; printInfo("help");
     m_MakeShared["exit"] = &CExit::create; printInfo("exit");
     m_MakeShared["vars"] = &CVars::create; printInfo("vars");
+    m_MakeShared["scan"] = &CScan::create; printInfo("scan");
 }
 
 void CCalculator::run() {
@@ -36,7 +38,7 @@ void CCalculator::run() {
         } catch (int end) {
             break;
         } catch (std::logic_error &e) {
-            std::cerr << e.what() << std::endl;
+            std::cout << e.what() << std::endl;
         }
     }
 
@@ -67,6 +69,6 @@ void CCalculator::printInfo(const std::string& name) {
         command->printInfo();
         m_Memory.addCommandName(name);
     } catch (std::logic_error &e) {
-        std::cerr << "Command not found." << std::endl;
+        std::cout << "Command not found." << std::endl;
     }
 }
