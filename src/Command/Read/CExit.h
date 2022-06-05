@@ -1,22 +1,23 @@
-#ifndef SEMWORK_CHELP_H
-#define SEMWORK_CHELP_H
+#ifndef SEMWORK_CEXIT_H
+#define SEMWORK_CEXIT_H
 
 
-#include <map>
-#include <memory>
 #include "../CCommand.h"
-#include "../../Calculator/CMemory.h"
 #include "../../Calculator/CCalculator.h"
 
-class CHelp : public CCommand {
+class CExit : public CCommand {
 public:
-    CHelp(CCalculator& calculator, CMemory& memory);
+    CExit(CCalculator& calculator, CMemory& memory);
 
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
     void validate(const std::deque<std::string> &argv) const override;
 
-    void execute(const std::deque<std::string> &args) override;
+    void execute(const std::deque<std::string> &argv) override;
+
+    void undo() override;
+
+    void printInfo() override;
 
 private:
     CCalculator& m_Calculator;
@@ -24,4 +25,4 @@ private:
 };
 
 
-#endif //SEMWORK_CHELP_H
+#endif //SEMWORK_CEXIT_H

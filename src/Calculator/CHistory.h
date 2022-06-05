@@ -9,16 +9,12 @@ class CHistory {
 public:
     CHistory();
 
-    void push(std::shared_ptr<CCommand>& command) {
-        m_History.push_back(command);
-    }
+    void push(std::shared_ptr<CCommand>& command);
 
-    void pop() {
-        m_History.pop_back();
-    }
+    void pop();
 
 private:
-    std::vector<std::shared_ptr<CCommand>> m_History;
+    std::deque<std::shared_ptr<CCommand>> m_History;
 };
 
 

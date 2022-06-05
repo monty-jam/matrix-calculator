@@ -14,6 +14,8 @@ public:
 
     std::string getCommandInfo() const;
 
+    const std::map<std::string, std::shared_ptr<CMatrix>>& getMatrices() const;
+
     void addCommandName(const std::string& name);
 
     void addCommandInfo(const std::string& format, const std::string& helpInfo);

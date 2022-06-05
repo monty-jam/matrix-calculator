@@ -13,6 +13,10 @@ public:
 
     void run();
 
+    void exit();
+
+    void undo();
+
 private:
     std::map<std::string,
             // Function pointer that returns a shared_ptr<CCommand> and takes CCalculator& and CMemory&
@@ -22,9 +26,13 @@ private:
 
     CHistory m_History;
 
-    std::string line;
+    std::string m_Line;
 
     std::deque<std::string> parseLine() const;
+
+    bool m_ExitFlag = false;
+
+    void printInfo(const std::string& name);
 };
 
 
