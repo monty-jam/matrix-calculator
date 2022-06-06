@@ -10,10 +10,9 @@ class CMatrixDense : public CMatrix {
 public:
     CMatrixDense(unsigned width, unsigned height, unsigned zeroes, std::vector<std::vector<double>> mtx);
     double at(unsigned int x, unsigned int y) const override;
-//    virtual std::shared_ptr<CMatrix> create(std::vector<double> values) const override;
-//
-//    std::shared_ptr<CMatrix> Transpose() const override;
-//    std::shared_ptr<CMatrix> Merge(const CMatrix &rhs) const override;
+
+    std::shared_ptr<CMatrix> transpose() const override;
+//    std::shared_ptr<CMatrix> merge(const CMatrix &rhs) const override;
 
 private:
     std::vector<std::vector<double>> m_Values;

@@ -9,10 +9,13 @@
 class CMatrixSparse : public CMatrix {
 public:
     CMatrixSparse(unsigned width, unsigned height, unsigned zeroes, const std::vector<std::vector<double>>& mtx);
+
+    CMatrixSparse(unsigned width, unsigned height, unsigned zeroes,
+                  std::map<std::pair<unsigned, unsigned>, double> &mtx);
+
     double at(unsigned int x, unsigned int y) const override;
-//    std::shared_ptr<CMatrix> create(std::vector<double> values) const override;
-//
-//    std::shared_ptr<CMatrix> Transpose() const override;
+
+    std::shared_ptr<CMatrix> transpose() const override;
 //    std::shared_ptr<CMatrix> Merge(const CMatrix &rhs) const override;
 
 private:

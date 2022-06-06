@@ -9,6 +9,9 @@
 #include "../Command/WriteMemory/CScan.h"
 #include "../Command/Read/CPrint.h"
 #include "../Command/WriteBasic/CAdd.h"
+#include "../Command/WriteBasic/CSub.h"
+#include "../Command/WriteBasic/CMul.h"
+#include "../Command/WriteBasic/CTrans.h"
 
 CCalculator::CCalculator() {
     m_MakeShared["help"] = &CHelp::create; printInfo("help");
@@ -18,6 +21,9 @@ CCalculator::CCalculator() {
 
     m_MakeShared["scan"] = &CScan::create; printInfo("scan");
     m_MakeShared["+"] = &CAdd::create; printInfo("+");
+    m_MakeShared["-"] = &CSub::create; printInfo("-");
+    m_MakeShared["*"] = &CMul::create; printInfo("*");
+    m_MakeShared["T"] = &CTrans::create; printInfo("T");
 }
 
 void CCalculator::run() {

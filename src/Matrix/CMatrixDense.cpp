@@ -13,3 +13,14 @@ double CMatrixDense::at(unsigned int x, unsigned int y) const {
     return m_Values[y][x];
 }
 
+std::shared_ptr<CMatrix> CMatrixDense::transpose() const {
+    std::vector<std::vector<double>> mtx(m_Width);
+
+    for (int x = 0; x < m_Width; ++x)
+        for (int y = 0; y < m_Height; ++y) {
+            mtx[x].push_back(at(x,y));
+        }
+
+    return std::make_shared<CMatrixDense>(m_Height, m_Width, m_Zeroes, mtx);
+}
+

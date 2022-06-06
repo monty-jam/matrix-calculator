@@ -38,36 +38,50 @@ std::shared_ptr<CMatrix> CMatrix::operator+(const CMatrix &rhs) const {
 
     return decider(m_Width, m_Height, zeroes, mtx);
 }
-//
-//std::shared_ptr<CMatrix> CMatrix::operator-(const CMatrix &rhs) const {
-//    if (m_Width != rhs.m_Width || m_Height != rhs.m_Height)
-//        throw std::invalid_argument("Incorrect matrices' dimensions.");
-//
-//    std::vector<double> res;
-//    for (unsigned int i = 0; i < m_Height; ++i)
-//        for (unsigned int j = 0; i < m_Width; ++j) {
-//            double value = at(j, i) - rhs.at(j, i);
-//            res.push_back(value);
-//        }
-//
-//
-//    return create(res);
-//}
-//
-//std::shared_ptr<CMatrix> CMatrix::operator*(const CMatrix &rhs) const {
-//    if (m_Width != rhs.m_Height)
-//        throw std::invalid_argument("Incorrect matrices' dimensions.");
-//
-//    std::vector<double> res;
-//    for (unsigned int i = 0; i < m_Height; ++i)
-//        for (unsigned int j = 0; i < m_Width; ++j) {
-//            double value = 0;
-//            for (unsigned int k = 0; k < rhs.m_Width; ++k)
-//                value += at(i, k) * rhs.at(k, j);
-//            res.push_back(value);
-//        }
-//    return create(res);
-//}
+
+std::shared_ptr<CMatrix> CMatrix::operator-(const CMatrix &rhs) const {
+    if (m_Width != rhs.m_Width || m_Height != rhs.m_Height)
+        throw std::invalid_argument("Incorrect matrices' dimensions.");
+
+    std::vector<std::vector<double>> mtx(m_Height);
+    int zeroes = 0;
+    double val;
+
+    for (unsigned y = 0; y < m_Height; ++y)
+        for (unsigned x = 0; x < m_Width; ++x) {
+            val = at(x, y) - rhs.at(x, y);
+
+            if (fabs(val) < 0.0001) val = 0;
+            if (val == 0) zeroes++;
+
+            mtx[y].push_back(val);
+        }
+
+    return decider(m_Width, m_Height, zeroes, mtx);
+}
+
+std::shared_ptr<CMatrix> CMatrix::operator*(const CMatrix &rhs) const {
+    if (m_Width != rhs.m_Height)
+        throw std::invalid_argument("Incorrect matrices' dimensions.");
+
+    std::vector<std::vector<double>> mtx(m_Height);
+    int zeroes = 0;
+
+    for (unsigned y = 0; y < m_Height; ++y)
+        for (unsigned x = 0; x < rhs.m_Width; ++x) {
+            double val = 0;
+
+            for (unsigned int k = 0; k < m_Width; ++k)
+                val += at(k, y) * rhs.at(x, k);
+
+            if (fabs(val) < 0.0001) val = 0;
+            if (val == 0) zeroes++;
+
+            mtx[y].push_back(val);
+        }
+
+    return decider(rhs.m_Width, m_Height, zeroes, mtx);
+}
 
 void CMatrix::print(std::ostream &os) const {
     for (int y = 0; y < m_Height; ++y) {
