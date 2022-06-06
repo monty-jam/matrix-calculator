@@ -3,27 +3,33 @@
 #include <functional>
 #include <deque>
 #include "CCalculator.h"
-#include "../Command/Read/CHelp.h"
-#include "../Command/Read/CExit.h"
-#include "../Command/Read/CVars.h"
+#include "../Command/ReadBasic/CHelp.h"
+#include "../Command/ReadBasic/CExit.h"
+#include "../Command/ReadBasic/CVars.h"
 #include "../Command/WriteMemory/CScan.h"
-#include "../Command/Read/CPrint.h"
+#include "../Command/ReadBasic/CPrint.h"
 #include "../Command/WriteBasic/CAdd.h"
 #include "../Command/WriteBasic/CSub.h"
 #include "../Command/WriteBasic/CMul.h"
 #include "../Command/WriteBasic/CTrans.h"
+#include "../Command/WriteComplex/CMerge.h"
+#include "../Command/WriteComplex/CCut.h"
+#include "../Command/ReadBasic/CUndo.h"
 
 CCalculator::CCalculator() {
     m_MakeShared["help"] = &CHelp::create; printInfo("help");
     m_MakeShared["exit"] = &CExit::create; printInfo("exit");
     m_MakeShared["vars"] = &CVars::create; printInfo("vars");
     m_MakeShared["print"] = &CPrint::create; printInfo("print");
+    m_MakeShared["undo"] = &CUndo::create; printInfo("undo");
 
     m_MakeShared["scan"] = &CScan::create; printInfo("scan");
     m_MakeShared["+"] = &CAdd::create; printInfo("+");
     m_MakeShared["-"] = &CSub::create; printInfo("-");
     m_MakeShared["*"] = &CMul::create; printInfo("*");
     m_MakeShared["T"] = &CTrans::create; printInfo("T");
+    m_MakeShared["merge"] = &CMerge::create; printInfo("merge");
+    m_MakeShared["cut"] = &CCut::create; printInfo("cut");
 }
 
 void CCalculator::run() {

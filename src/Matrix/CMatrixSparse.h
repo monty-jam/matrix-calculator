@@ -16,7 +16,6 @@ public:
     double at(unsigned int x, unsigned int y) const override;
 
     std::shared_ptr<CMatrix> transpose() const override;
-//    std::shared_ptr<CMatrix> Merge(const CMatrix &rhs) const override;
 
 private:
     std::map<std::pair<unsigned, unsigned>, double> m_Values;
