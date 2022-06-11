@@ -10,6 +10,9 @@ public:
     CMatrix(unsigned width, unsigned height, unsigned zeroes);
     virtual ~CMatrix();
 
+    static std::shared_ptr<CMatrix> create(unsigned int width, unsigned int height, unsigned int zeroes,
+                                           const std::vector<std::vector<double>>& mtx);
+
     virtual double at(unsigned int x, unsigned int y) const = 0;
 
     std::shared_ptr<CMatrix> operator+(const CMatrix &rhs) const;
@@ -27,9 +30,6 @@ protected:
     unsigned m_Width;
     unsigned m_Height;
     unsigned m_Zeroes;
-
-    static std::shared_ptr<CMatrix> decider(unsigned int width, unsigned int height, unsigned int zeroes,
-                                     const std::vector<std::vector<double>>& mtx);
 };
 
 

@@ -14,17 +14,19 @@ public:
 
     std::set<std::string> getCommandNames() const;
 
-    std::string getCommandInfo() const;
+    bool doesCommandNameExist(const std::string &name) const;
 
-    const std::map<std::string, std::shared_ptr<CMatrix>>& getMatrices() const;
+    std::vector<std::string> getMatrixNames() const;
 
-    void addCommandName(const std::string& name);
+    bool doesMatrixExist(const std::string &name) const;
 
-    void addCommandInfo(const std::string& format, const std::string& helpInfo);
+    std::shared_ptr<CMatrix> getMatrix(const std::string &name) const;
 
-    void addMatrix(const std::string& name, std::shared_ptr<CMatrix> mtx);
+    void addCommandName(const std::string &name);
 
-    void deleteMatrix(const std::string& name);
+    void addMatrix(const std::string &name, std::shared_ptr<CMatrix> mtx);
+
+    void deleteMatrix(const std::string &name);
 
 private:
     std::set<std::string> m_CommandNames;

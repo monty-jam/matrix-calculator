@@ -8,20 +8,33 @@ std::set<std::string> CMemory::getCommandNames() const {
     return m_CommandNames;
 }
 
-std::string CMemory::getCommandInfo() const {
-    return m_CommandInfo;
+bool CMemory::doesCommandNameExist(const std::string &name) const {
+    if (m_CommandNames.find(name) != m_CommandNames.end())
+        return true;
+    else
+        return false;
 }
 
-const std::map<std::string, std::shared_ptr<CMatrix>> &CMemory::getMatrices() const {
-    return m_Matrices;
+std::vector<std::string> CMemory::getMatrixNames() const {
+    std::vector<std::string> result;
+    for (const auto& matrix : m_Matrices)
+        result.push_back(matrix.first);
+    return result;
+}
+
+bool CMemory::doesMatrixExist(const std::string &name) const {
+    if (m_Matrices.find(name) != m_Matrices.end())
+        return true;
+    else
+        return false;
+}
+
+std::shared_ptr<CMatrix> CMemory::getMatrix(const std::string &name) const {
+    return m_Matrices.at(name);
 }
 
 void CMemory::addCommandName(const std::string &name) {
     m_CommandNames.insert(name);
-}
-
-void CMemory::addCommandInfo(const std::string& format, const std::string& helpInfo) {
-    m_CommandInfo.append("\t" + format + "\n\t\t" + helpInfo + "\n");
 }
 
 void CMemory::addMatrix(const std::string &name, std::shared_ptr<CMatrix> mtx) {

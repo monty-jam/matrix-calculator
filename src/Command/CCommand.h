@@ -10,21 +10,37 @@
 
 class CCommand {
 public:
+    CCommand(CMemory &memory, std::string name, std::vector<std::string> argFormat, std::string helpInfo);
+
     virtual ~CCommand();
 
-    virtual void validate(const std::deque<std::string> &argv) const = 0;
-
-    virtual void execute(const std::deque<std::string> &argv) = 0;
-
-    virtual void undo() = 0;
+    void call(const std::deque<std::string> &argv);
 
     bool isWrite() const;
 
-    virtual void printInfo() = 0;
+    void undo();
 
 protected:
+    CMemory &m_Memory;
+
+    virtual void execute(const std::deque<std::string> &argv) = 0;
+
+private:
+    std::string m_Name;
+    std::vector<std::string> m_ArgFormat;
+    std::string m_HelpInfo;
+
+    bool m_IsWrite;
     std::string m_BackupName;
     std::shared_ptr<CMatrix> m_BackupMatrix = nullptr;
+
+    void validate(const std::deque<std::string> &argv) const;
+
+    void backup(const std::deque<std::string> &argv);
+
+    void print(std::ostream &os) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const CCommand &cmd);
 };
 
 

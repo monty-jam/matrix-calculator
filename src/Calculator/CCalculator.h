@@ -4,6 +4,7 @@
 
 #include <string>
 #include <memory>
+#include <functional>
 #include "CMemory.h"
 #include "CHistory.h"
 
@@ -17,10 +18,12 @@ public:
 
     void undo();
 
+    std::function< std::shared_ptr<CCommand> (CCalculator &, CMemory &) > getCommand(const std::string& name) const;
+
 private:
     std::map<std::string,
             // Function pointer that returns a shared_ptr<CCommand> and takes CCalculator& and CMemory&
-            std::shared_ptr<CCommand> (*)(CCalculator &, CMemory &)> m_MakeShared;
+            std::function< std::shared_ptr<CCommand> (CCalculator &, CMemory &) >> m_Commands;
 
     CMemory m_Memory;
 
@@ -31,8 +34,6 @@ private:
     std::deque<std::string> parseLine() const;
 
     bool m_ExitFlag = false;
-
-    void printInfo(const std::string& name);
 };
 
 

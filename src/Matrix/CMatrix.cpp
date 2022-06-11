@@ -10,7 +10,7 @@ CMatrix::CMatrix(unsigned width, unsigned height, unsigned zeroes) : m_Width(wid
 
 CMatrix::~CMatrix() = default;
 
-std::shared_ptr<CMatrix> CMatrix::decider(unsigned width, unsigned height, unsigned zeroes,
+std::shared_ptr<CMatrix> CMatrix::create(unsigned width, unsigned height, unsigned zeroes,
                                         const std::vector<std::vector<double>>& mtx) {
     if (zeroes > width * height / 2)
         return std::make_shared<CMatrixSparse>(width, height, zeroes, mtx);
@@ -36,7 +36,7 @@ std::shared_ptr<CMatrix> CMatrix::operator+(const CMatrix &rhs) const {
             mtx[y].push_back(val);
         }
 
-    return decider(m_Width, m_Height, zeroes, mtx);
+    return create(m_Width, m_Height, zeroes, mtx);
 }
 
 std::shared_ptr<CMatrix> CMatrix::operator-(const CMatrix &rhs) const {
@@ -57,7 +57,7 @@ std::shared_ptr<CMatrix> CMatrix::operator-(const CMatrix &rhs) const {
             mtx[y].push_back(val);
         }
 
-    return decider(m_Width, m_Height, zeroes, mtx);
+    return create(m_Width, m_Height, zeroes, mtx);
 }
 
 std::shared_ptr<CMatrix> CMatrix::operator*(const CMatrix &rhs) const {
@@ -80,7 +80,7 @@ std::shared_ptr<CMatrix> CMatrix::operator*(const CMatrix &rhs) const {
             mtx[y].push_back(val);
         }
 
-    return decider(rhs.m_Width, m_Height, zeroes, mtx);
+    return create(rhs.m_Width, m_Height, zeroes, mtx);
 }
 
 std::shared_ptr<CMatrix> CMatrix::merge(const CMatrix &rhs) const {
@@ -101,7 +101,7 @@ std::shared_ptr<CMatrix> CMatrix::merge(const CMatrix &rhs) const {
         }
     }
 
-    return decider(m_Width + rhs.m_Width, m_Height, zeroes, mtx);
+    return create(m_Width + rhs.m_Width, m_Height, zeroes, mtx);
 }
 
 std::shared_ptr<CMatrix> CMatrix::cut(unsigned w, unsigned h, unsigned ax, unsigned ay) const {
@@ -117,7 +117,7 @@ std::shared_ptr<CMatrix> CMatrix::cut(unsigned w, unsigned h, unsigned ax, unsig
             if (at(x + ax, y + ay) == 0) zeroes++;
         }
 
-    return decider(w, h, zeroes, mtx);
+    return create(w, h, zeroes, mtx);
 }
 
 void CMatrix::print(std::ostream &os) const {
