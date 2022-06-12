@@ -20,6 +20,8 @@
 #include "../Command/Basic/CDel.h"
 #include "../Command/Math/CRank.h"
 #include "../Command/Math/CDet.h"
+#include "../Command/Math/CInv.h"
+#include "../Command/Math/CAdj.h"
 
 CCalculator::CCalculator() {
     m_Commands["help"] = &CHelp::create;
@@ -42,6 +44,8 @@ CCalculator::CCalculator() {
     m_Commands["gem"] = &CGem::create;
     m_Commands["rank"] = &CRank::create;
     m_Commands["det"] = &CDet::create;
+    m_Commands["adj"] = &CAdj::create;
+    m_Commands["inv"] = &CInv::create;
 
     for (const auto &command: m_Commands)
         m_Memory.addCommandName(command.first);

@@ -7,7 +7,8 @@
 CCommand::CCommand(CMemory &memory, std::string name, std::vector<std::string> argFormat, std::string helpInfo) :
                     m_Memory(memory), m_Name(std::move(name)),
                     m_ArgFormat(std::move(argFormat)), m_HelpInfo(std::move(helpInfo)) {
-    m_IsWrite = !m_ArgFormat.empty() && m_ArgFormat[0] == "RESULT";
+    m_IsWrite = (!m_ArgFormat.empty() && m_ArgFormat[0] == "RESULT")
+            || m_Name == "del";
 }
 
 CCommand::~CCommand() = default;

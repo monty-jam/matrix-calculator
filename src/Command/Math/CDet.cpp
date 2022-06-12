@@ -27,9 +27,12 @@ void CDet::execute(const std::deque<std::string> &argv, std::vector<std::string>
     std::shared_ptr<CMatrix> mtx = m_Memory.getMatrix("~det");
 
     for (unsigned x = 0; x < width; ++x)
-        determinant *= mtx->at(x,x);
+        determinant *= mtx->at(x, x);
 
-    std::cout << "Determinant: " << determinant << std::endl;
+    if (retv.empty()) // other commands call CDet with a non-empty retv vector,
+        // so that it won't print the value, only
+        std::cout << "Determinant: " << determinant << std::endl;
+    retv.push_back(std::to_string(determinant));
 
     CDel::create(m_Calculator, m_Memory)->call({"~det"}, gemRetv);
 }
