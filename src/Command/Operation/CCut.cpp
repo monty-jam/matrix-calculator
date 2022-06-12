@@ -11,10 +11,23 @@ std::shared_ptr<CCommand> CCut::create(CCalculator& calculator, CMemory& memory)
 }
 
 void CCut::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
-    unsigned w = std::stoi(argv[2]);
-    unsigned h = std::stoi(argv[3]);
-    unsigned x = std::stoi(argv[4]);
-    unsigned y = std::stoi(argv[5]);
+    std::shared_ptr<CMatrix> mtxVar = m_Memory.getMatrix(argv[1]);
+    unsigned width = std::stoi(argv[2]);
+    unsigned height = std::stoi(argv[3]);
+    unsigned ax = std::stoi(argv[4]);
+    unsigned ay = std::stoi(argv[5]);
 
-    m_Memory.addMatrix(argv[0], m_Memory.getMatrix(argv[1])->cut(w, h, x, y));
+    if ((mtxVar->getWidth() < width + ax) || (mtxVar->getHeight() < height + ay))
+        throw std::out_of_range("Incorrect input values, getting out of matrix range.");
+
+    std::vector<std::vector<double>> mtx(height);
+    unsigned zeroes = 0;
+
+    for (unsigned y = 0; y < height; ++y)
+        for (unsigned x = 0; x < width; ++x) {
+            mtx[y].push_back(mtxVar->at(x + ax, y + ay));
+            if (mtxVar->at(x + ax, y + ay) == 0) zeroes++;
+        }
+
+    m_Memory.addMatrix(argv[0], CMatrix::create(width, height, zeroes, mtx));
 }
