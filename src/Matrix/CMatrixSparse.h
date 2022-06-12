@@ -13,6 +13,8 @@ public:
     CMatrixSparse(unsigned width, unsigned height, unsigned zeroes,
                   std::map<std::pair<unsigned, unsigned>, double> &mtx);
 
+    void save(std::ofstream& fileOut) const override;
+
     double at(unsigned int x, unsigned int y) const override;
 
     std::shared_ptr<CMatrix> transpose() const override;

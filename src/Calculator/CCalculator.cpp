@@ -22,6 +22,8 @@
 #include "../Command/Math/CDet.h"
 #include "../Command/Math/CInv.h"
 #include "../Command/Math/CAdj.h"
+#include "../Command/Memory/CSave.h"
+#include "../Command/Memory/CLoad.h"
 
 CCalculator::CCalculator() {
     m_Commands["help"] = &CHelp::create;
@@ -33,6 +35,8 @@ CCalculator::CCalculator() {
 
     m_Commands["scan"] = &CScan::create;
     m_Commands["print"] = &CPrint::create;
+    m_Commands["save"] = &CSave::create;
+    m_Commands["load"] = &CLoad::create;
 
     m_Commands["+"] = &CAdd::create;
     m_Commands["-"] = &CSub::create;

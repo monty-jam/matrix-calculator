@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <fstream>
 #include "CMatrix.h"
 #include "CMatrixDense.h"
 #include "CMatrixSparse.h"
@@ -33,7 +34,7 @@ unsigned CMatrix::getZeroes() const {
 void CMatrix::print(std::ostream &os) const {
     for (unsigned y = 0; y < m_Height; ++y) {
         for (unsigned x = 0; x < m_Width; ++x) {
-            os << std::setw(5) << at(x, y) << " ";
+            os << std::setw(6) << at(x, y) << " ";
         }
         os << std::endl;
     }

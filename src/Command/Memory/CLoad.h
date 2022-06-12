@@ -1,12 +1,12 @@
-#ifndef SEMWORK_CSAVE_H
-#define SEMWORK_CSAVE_H
+#ifndef SEMWORK_CLOAD_H
+#define SEMWORK_CLOAD_H
 
 
 #include "../../Calculator/CCalculator.h"
 
-class CSave : public CCommand {
+class CLoad : public CCommand {
 public:
-    CSave(CCalculator &calculator, CMemory &memory);
+    CLoad(CCalculator &calculator, CMemory &memory);
 
     static std::shared_ptr<CCommand> create(CCalculator &calculator, CMemory &memory);
 
@@ -17,4 +17,4 @@ private:
 };
 
 
-#endif //SEMWORK_CSAVE_H
+#endif //SEMWORK_CLOAD_H

@@ -10,6 +10,8 @@ class CMatrixDense : public CMatrix {
 public:
     CMatrixDense(unsigned width, unsigned height, unsigned zeroes, std::vector<std::vector<double>> mtx);
 
+    void save(std::ofstream& fileOut) const override;
+
     double at(unsigned int x, unsigned int y) const override;
 
     std::shared_ptr<CMatrix> transpose() const override;

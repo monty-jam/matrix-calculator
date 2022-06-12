@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <iostream>
+#include <fstream>
 #include <cmath>
 
 CCommand::CCommand(CMemory &memory, std::string name, std::vector<std::string> argFormat, std::string helpInfo) :
@@ -68,6 +69,22 @@ void CCommand::validate(const std::deque<std::string> &argv) const {
                 throw std::invalid_argument("Coordinate value is not int.");
             if (val < 0)
                 throw std::invalid_argument("Coordinate value is less than 0.");
+
+        } else if (m_ArgFormat[i] == "PATH-W") {
+            std::ofstream file;
+            file.open(argv[i]);
+            if (!file.is_open())
+                throw std::invalid_argument("Don't have permission to create/open given file path.");
+            else
+                file.close();
+
+        } else if (m_ArgFormat[i] == "PATH-R") {
+            std::ifstream file;
+            file.open(argv[i]);
+            if (!file.is_open())
+                throw std::invalid_argument("Don't have permission to read from given file path.");
+            else
+                file.close();
 
         } else {
             throw std::invalid_argument("Used command contains an incorrect argument format data.");

@@ -1,4 +1,5 @@
 #include "CMatrixSparse.h"
+#include <fstream>
 
 CMatrixSparse::CMatrixSparse(unsigned int width, unsigned int height, unsigned int zeroes,
                              const std::vector<std::vector<double>>& matrix) : CMatrix(width, height, zeroes) {
@@ -11,6 +12,13 @@ CMatrixSparse::CMatrixSparse(unsigned int width, unsigned int height, unsigned i
 CMatrixSparse::CMatrixSparse(unsigned width, unsigned height, unsigned zeroes,
                              std::map<std::pair<unsigned, unsigned>, double>& matrix) : CMatrix(width, height, zeroes),
                              m_Values(matrix) {}
+
+void CMatrixSparse::save(std::ofstream &fileOut) const {
+    fileOut << "sparse " << m_Width << " " << m_Height << " " << m_Values.size() << "\n";
+    for (const auto &value : m_Values)
+        fileOut << value.first.first << " " << value.first.second << " " << value.second << "\n";
+    fileOut << "end";
+}
 
 double CMatrixSparse::at(unsigned int x, unsigned int y) const {
     if (x < 0 || x >= m_Width || y < 0 || y >= m_Height)
