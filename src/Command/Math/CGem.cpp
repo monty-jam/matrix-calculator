@@ -1,3 +1,4 @@
+#include <cmath>
 #include "CGem.h"
 
 CGem::CGem(CCalculator &calculator, CMemory &memory)
@@ -6,10 +7,85 @@ CGem::CGem(CCalculator &calculator, CMemory &memory)
                    "perform Gaussian elimination on a given variable and save to the result"),
           m_Calculator(calculator) {}
 
-std::shared_ptr<CCommand> CGem::create(CCalculator& calculator, CMemory& memory) {
+std::shared_ptr<CCommand> CGem::create(CCalculator &calculator, CMemory &memory) {
     return std::make_shared<CGem>(calculator, memory);
 }
 
 void CGem::execute(const std::deque<std::string> &argv) {
+    std::shared_ptr<CMatrix> mtxVar = m_Memory.getMatrix(argv[1]);
 
+    unsigned width = mtxVar->getWidth();
+    unsigned height = mtxVar->getHeight();
+    unsigned zeroes = mtxVar->getZeroes();
+
+    std::vector<std::vector<double>> mtx(height);
+    for (unsigned y = 0; y < height; ++y)
+        for (unsigned x = 0; x < width; ++x)
+            mtx[y].push_back(mtxVar->at(x, y));
+
+    unsigned y = 0;
+    unsigned x = 0;
+    while (true) {
+        if (y >= height || x >= width)
+            break;
+
+        if (mtx[y][x] == 0) {
+            if (y == height - 1) // it's the last row and current is zero, so no values under the current
+                x++;
+
+            for (unsigned r = y + 1; r < height; ++r) {
+                if (mtx[r][x] != 0) { // swap non-zero value up
+                    g1(mtx, y, r);
+                    break;
+                }
+
+                if (r == height - 1) // all values under current are 0
+                    x++;
+            }
+
+        } else { // mtx[y][x] != 0
+            for (unsigned r = y + 1; r < height; ++r)
+                if (mtx[r][x] != 0) // destroy non-zero value under the current
+                    g3(mtx, y, r, x, width, zeroes);
+
+            y++;
+            x++;
+
+        }
+    }
+
+    rank = y;
+
+    m_Memory.addMatrix(argv[0], CMatrix::create(width, height, zeroes, mtx));
+}
+
+void CGem::g1(std::vector<std::vector<double>> &mtx, unsigned y1, unsigned y2) {
+    mtx[y1].swap(mtx[y2]);
+    detSign *= -1;
+}
+
+void CGem::g3(std::vector<std::vector<double>> &mtx, unsigned y1, unsigned y2, unsigned x, unsigned width,
+              unsigned &zeroes) {
+    double k = mtx[y2][x] / mtx[y1][x];
+
+    for (int c = 0; c < width; ++c) {
+        if (mtx[y1][c] != 0) {
+            double prev = mtx[y2][c];
+
+            mtx[y2][c] -= mtx[y1][c] * k;
+
+            if (fabs(mtx[y2][c]) < 0.0001) mtx[y2][c] = 0;
+            if (mtx[y2][c] == 0) zeroes++; // if non-zero becomes zero
+
+            if (prev == 0 && mtx[y2][c] == 0) zeroes--; // if zero becomes non-zero
+        }
+    }
+}
+
+int CGem::getSign() const {
+    return detSign;
+}
+
+unsigned CGem::getRank() const {
+    return rank;
 }

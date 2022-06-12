@@ -18,6 +18,18 @@ std::shared_ptr<CMatrix> CMatrix::create(unsigned width, unsigned height, unsign
         return std::make_shared<CMatrixDense>(width, height, zeroes, mtx);
 }
 
+unsigned CMatrix::getWidth() const {
+    return m_Width;
+}
+
+unsigned CMatrix::getHeight() const {
+    return m_Height;
+}
+
+unsigned CMatrix::getZeroes() const {
+    return m_Zeroes;
+}
+
 std::shared_ptr<CMatrix> CMatrix::operator+(const CMatrix &rhs) const {
     if (m_Width != rhs.m_Width || m_Height != rhs.m_Height)
         throw std::invalid_argument("Incorrect matrices' dimensions.");

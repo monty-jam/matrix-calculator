@@ -16,23 +16,26 @@
 #include "../Command/Operation/CCut.h"
 #include "../Command/Basic/CUndo.h"
 #include "../Command/Basic/CHelpCmd.h"
+#include "../Command/Math/CGem.h"
 
 CCalculator::CCalculator() {
     m_Commands["help"] = &CHelp::create;
     m_Commands["help-cmd"] = &CHelpCmd::create;
     m_Commands["exit"] = &CExit::create;
     m_Commands["vars"] = &CVars::create;
-    m_Commands["print"] = &CPrint::create;
     m_Commands["undo"] = &CUndo::create;
 
     m_Commands["scan"] = &CScan::create;
+    m_Commands["print"] = &CPrint::create;
+
     m_Commands["+"] = &CAdd::create;
     m_Commands["-"] = &CSub::create;
     m_Commands["*"] = &CMul::create;
     m_Commands["T"] = &CTrans::create;
-
     m_Commands["merge"] = &CMerge::create;
     m_Commands["cut"] = &CCut::create;
+
+    m_Commands["gem"] = &CGem::create;
 
     for (const auto &command: m_Commands)
         m_Memory.addCommandName(command.first);

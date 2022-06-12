@@ -15,6 +15,10 @@ public:
 
     virtual double at(unsigned int x, unsigned int y) const = 0;
 
+    unsigned getWidth() const;
+    unsigned getHeight() const;
+    unsigned getZeroes() const;
+
     std::shared_ptr<CMatrix> operator+(const CMatrix &rhs) const;
     std::shared_ptr<CMatrix> operator-(const CMatrix &rhs) const;
     std::shared_ptr<CMatrix> operator*(const CMatrix &rhs) const;
