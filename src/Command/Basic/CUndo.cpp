@@ -11,6 +11,6 @@ std::shared_ptr<CCommand> CUndo::create(CCalculator& calculator, CMemory& memory
     return std::make_shared<CUndo>(calculator, memory);
 }
 
-void CUndo::execute(const std::deque<std::string> &argv) {
+void CUndo::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     m_Calculator.undo();
 }

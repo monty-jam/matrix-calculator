@@ -10,6 +10,6 @@ std::shared_ptr<CCommand> CMerge::create(CCalculator &calculator, CMemory &memor
     return std::make_shared<CMerge>(calculator, memory);
 }
 
-void CMerge::execute(const std::deque<std::string> &argv) {
+void CMerge::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     m_Memory.addMatrix(argv[0], m_Memory.getMatrix(argv[1])->merge(*m_Memory.getMatrix(argv[2])));
 }

@@ -11,6 +11,6 @@ std::shared_ptr<CCommand> CPrint::create(CCalculator& calculator, CMemory& memor
     return std::make_shared<CPrint>(calculator, memory);
 }
 
-void CPrint::execute(const std::deque<std::string> &argv) {
+void CPrint::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     std::cout << *m_Memory.getMatrix(argv[0]);
 }

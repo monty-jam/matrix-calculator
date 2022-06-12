@@ -10,6 +10,6 @@ std::shared_ptr<CCommand> CTrans::create(CCalculator& calculator, CMemory& memor
     return std::make_shared<CTrans>(calculator, memory);
 }
 
-void CTrans::execute(const std::deque<std::string> &argv) {
+void CTrans::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     m_Memory.addMatrix(argv[0], m_Memory.getMatrix(argv[1])->transpose());
 }

@@ -10,7 +10,7 @@ std::shared_ptr<CCommand> CCut::create(CCalculator& calculator, CMemory& memory)
     return std::make_shared<CCut>(calculator, memory);
 }
 
-void CCut::execute(const std::deque<std::string> &argv) {
+void CCut::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     unsigned w = std::stoi(argv[2]);
     unsigned h = std::stoi(argv[3]);
     unsigned x = std::stoi(argv[4]);

@@ -11,6 +11,6 @@ std::shared_ptr<CCommand> CExit::create(CCalculator& calculator, CMemory& memory
     return std::make_shared<CExit>(calculator, memory);
 }
 
-void CExit::execute(const std::deque<std::string> &argv) {
+void CExit::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     m_Calculator.exit();
 }

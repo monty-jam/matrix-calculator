@@ -15,7 +15,7 @@ std::shared_ptr<CCommand> CScan::create(CCalculator& calculator, CMemory& memory
     return std::make_shared<CScan>(calculator, memory);
 }
 
-void CScan::execute(const std::deque<std::string> &argv) {
+void CScan::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     int width = std::stoi(argv[1]);
     int height = std::stoi(argv[2]);
 

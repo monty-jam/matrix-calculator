@@ -12,10 +12,10 @@ CCommand::CCommand(CMemory &memory, std::string name, std::vector<std::string> a
 
 CCommand::~CCommand() = default;
 
-void CCommand::call(const std::deque<std::string> &argv) {
+void CCommand::call(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     validate(argv);
     backup(argv);
-    execute(argv);
+    execute(argv, retv);
 }
 
 bool CCommand::isWrite() const {
@@ -30,6 +30,10 @@ void CCommand::undo() {
         m_Memory.deleteMatrix(m_BackupName);
     else
         m_Memory.addMatrix(m_BackupName, m_BackupMatrix);
+}
+
+std::string CCommand::randomName() const {
+    return std::string();
 }
 
 void CCommand::validate(const std::deque<std::string> &argv) const {
@@ -92,5 +96,4 @@ std::ostream &operator<<(std::ostream &os, const CCommand &cmd) {
     cmd.print(os);
     return os;
 }
-
 

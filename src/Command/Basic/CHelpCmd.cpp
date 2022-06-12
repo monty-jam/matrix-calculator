@@ -11,6 +11,6 @@ std::shared_ptr<CCommand> CHelpCmd::create(CCalculator& calculator, CMemory& mem
     return std::make_shared<CHelpCmd>(calculator, memory);
 }
 
-void CHelpCmd::execute(const std::deque<std::string> &argv) {
+void CHelpCmd::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     std::cout << *m_Calculator.getCommand(argv[0])(m_Calculator, m_Memory) << std::endl;
 }

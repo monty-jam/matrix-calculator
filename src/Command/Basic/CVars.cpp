@@ -11,7 +11,7 @@ std::shared_ptr<CCommand> CVars::create(CCalculator& calculator, CMemory& memory
     return std::make_shared<CVars>(calculator, memory);
 }
 
-void CVars::execute(const std::deque<std::string> &argv) {
+void CVars::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     std::vector<std::string> variables = m_Memory.getMatrixNames();
 
     if (variables.empty()) {

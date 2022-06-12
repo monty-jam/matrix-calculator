@@ -11,7 +11,7 @@ std::shared_ptr<CCommand> CGem::create(CCalculator &calculator, CMemory &memory)
     return std::make_shared<CGem>(calculator, memory);
 }
 
-void CGem::execute(const std::deque<std::string> &argv) {
+void CGem::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
     std::shared_ptr<CMatrix> mtxVar = m_Memory.getMatrix(argv[1]);
 
     unsigned width = mtxVar->getWidth();
@@ -22,6 +22,8 @@ void CGem::execute(const std::deque<std::string> &argv) {
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
             mtx[y].push_back(mtxVar->at(x, y));
+
+    int detSign = 1;
 
     unsigned y = 0;
     unsigned x = 0;
@@ -36,6 +38,7 @@ void CGem::execute(const std::deque<std::string> &argv) {
             for (unsigned r = y + 1; r < height; ++r) {
                 if (mtx[r][x] != 0) { // swap non-zero value up
                     g1(mtx, y, r);
+                    detSign *= -1;
                     break;
                 }
 
@@ -54,14 +57,14 @@ void CGem::execute(const std::deque<std::string> &argv) {
         }
     }
 
-    rank = y;
+    retv.push_back(std::to_string(detSign)); // sign of determinant
+    retv.push_back(std::to_string(y)); // rank
 
     m_Memory.addMatrix(argv[0], CMatrix::create(width, height, zeroes, mtx));
 }
 
 void CGem::g1(std::vector<std::vector<double>> &mtx, unsigned y1, unsigned y2) {
     mtx[y1].swap(mtx[y2]);
-    detSign *= -1;
 }
 
 void CGem::g3(std::vector<std::vector<double>> &mtx, unsigned y1, unsigned y2, unsigned x, unsigned width,
@@ -80,12 +83,4 @@ void CGem::g3(std::vector<std::vector<double>> &mtx, unsigned y1, unsigned y2, u
             if (prev == 0 && mtx[y2][c] == 0) zeroes--; // if zero becomes non-zero
         }
     }
-}
-
-int CGem::getSign() const {
-    return detSign;
-}
-
-unsigned CGem::getRank() const {
-    return rank;
 }

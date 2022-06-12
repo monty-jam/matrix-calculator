@@ -14,7 +14,7 @@ public:
 
     virtual ~CCommand();
 
-    void call(const std::deque<std::string> &argv);
+    void call(const std::deque<std::string> &argv, std::vector<std::string> &retv);
 
     bool isWrite() const;
 
@@ -23,7 +23,9 @@ public:
 protected:
     CMemory &m_Memory;
 
-    virtual void execute(const std::deque<std::string> &argv) = 0;
+    virtual void execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) = 0;
+
+    std::string randomName() const;
 
 private:
     std::string m_Name;
