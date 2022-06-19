@@ -14,14 +14,13 @@ CMatrixSparse::CMatrixSparse(unsigned width, unsigned height, unsigned zeroes,
                              std::map<std::pair<unsigned, unsigned>, double>& matrix) : CMatrix(width, height, zeroes),
                              m_Values(matrix) {}
 
-void CMatrixSparse::save(std::string fileName) const {
+void CMatrixSparse::save(std::string filePath) const {
     std::ofstream fileWrite;
-    fileWrite.open(fileName);
+    fileWrite.open(filePath);
 
-    fileWrite << "sparse " << m_Width << " " << m_Height << " " << m_Values.size() << "\n";
+    fileWrite << "sparse " << m_Width << " " << m_Height << " " << m_Values.size();
     for (const auto &value : m_Values)
-        fileWrite << value.first.first << " " << value.first.second << " " << value.second << "\n";
-    fileWrite << '\0';
+        fileWrite << "\n" << value.first.first << " " << value.first.second << " " << value.second;
 
     fileWrite.close();
 }

@@ -1,6 +1,19 @@
 #include <iostream>
 #include "Calculator/CCalculator.h"
 
+/**
+ * @brief Main function.
+ *
+ * @return 0 on success.
+ */
+int main() {
+    CCalculator calculator;
+
+    calculator.run();
+
+    return 0;
+}
+
 // document directories
 
 /**
@@ -35,11 +48,3 @@
 * @dir src/Matrix
 * @brief Matrix effective memory representation related classes
 */
-
-int main() {
-    CCalculator calculator;
-
-    calculator.run();
-
-    return 0;
-}

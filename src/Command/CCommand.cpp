@@ -34,10 +34,6 @@ void CCommand::undo() {
         m_Memory.addMatrix(m_BackupName, m_BackupMatrix);
 }
 
-std::string CCommand::randomName() const {
-    return std::string();
-}
-
 void CCommand::validate(const std::deque<std::string> &argv) const {
     unsigned size = m_ArgFormat.size();
     if (argv.size() != size)

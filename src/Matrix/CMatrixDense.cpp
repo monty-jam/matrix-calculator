@@ -7,17 +7,22 @@ CMatrixDense::CMatrixDense(unsigned int width, unsigned int height, unsigned int
                            std::vector<std::vector<double>> mtx) : CMatrix(width, height, zeroes),
                                                                    m_Values(std::move(mtx)) {}
 
-void CMatrixDense::save(std::string fileName) const {
+void CMatrixDense::save(std::string filePath) const {
     std::ofstream fileWrite;
-    fileWrite.open(fileName);
+    fileWrite.open(filePath);
 
-    fileWrite << "dense " << m_Width << " " << m_Height << "\n";
+    fileWrite << "dense " << m_Width << " " << m_Height;
     for (const auto &row : m_Values) {
-        for (const auto &value: row)
-            fileWrite << value << " ";
-        fileWrite << '\n';
+        fileWrite << "\n";
+        bool first = true;
+        for (const auto &value: row) {
+            if (!first)
+                fileWrite << " ";
+            else
+                first = false;
+            fileWrite << value;
+        }
     }
-    fileWrite << '\0';
 
     fileWrite.close();
 }

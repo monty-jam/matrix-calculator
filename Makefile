@@ -32,7 +32,7 @@ doc: Doxyfile $(HEADERS)
 
 .PHONY: clean
 clean:
-	rm -rf popovle1 build/ debug/ doc/ 2>/dev/null
+	rm -rf popovle1 build/ debug/ doc/html doc/latex doc/index.html 2>/dev/null
 
 deps:
 	g++ -MM src/*.cpp src/*/*.cpp src/*/*/*.cpp > Makefile.d

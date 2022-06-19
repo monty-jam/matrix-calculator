@@ -54,14 +54,14 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
         for (unsigned i = 0; i < amount; ++i) {
             if (fileRead.eof()) {
                 fileRead.close();
-                throw std::invalid_argument("Reading error: Reach EOF earlier than expected.");
+                throw std::invalid_argument("Reading error: Reach EOF earlier than expected (While reading values).");
             }
 
             fileRead >> x >> y >> val;
 
             if (x >= width || y >= height || fileRead.fail()) {
                 fileRead.close();
-                throw std::invalid_argument("Reading error: Can't coordinates.");
+                throw std::invalid_argument("Reading error: Can't read coordinate and value.");
             }
 
             mtx[y][x] = val;
@@ -83,7 +83,7 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
             for (unsigned x = 0; x < width; ++x) {
                 if (fileRead.eof()) {
                     fileRead.close();
-                    throw std::invalid_argument("Reading error: Reach EOF earlier than expected.");
+                    throw std::invalid_argument("Reading error: Reach EOF earlier than expected (While reading values).");
                 }
 
                 fileRead >> val;
@@ -100,7 +100,7 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
 
         if (!fileRead.eof()) {
             fileRead.close();
-            throw std::invalid_argument("Reading error: Didn't reach EOF when was expected.");
+            throw std::invalid_argument("Reading error: Didn't reach EOF when was expected (While reading values).");
         }
 
         if (zeroes > width * height / 2)
