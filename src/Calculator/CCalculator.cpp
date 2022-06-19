@@ -75,8 +75,10 @@ void CCalculator::run() {
             if (m_Commands.find(argv[0]) == m_Commands.end())
                 throw std::invalid_argument("Unknown command.");
             std::shared_ptr<CCommand> command = m_Commands.at(argv[0])(*this, m_Memory);
-
             argv.pop_front();
+
+            // Return vector is used only for calling commands inside other commands,
+            // so in CCalculator it will be always empty
             std::vector<std::string> emptyRetv;
             command->call(argv, emptyRetv);
 

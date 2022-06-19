@@ -52,9 +52,14 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
         unsigned x, y;
         double val;
         for (unsigned i = 0; i < amount; ++i) {
+            if (fileRead.eof()) {
+                fileRead.close();
+                throw std::invalid_argument("Reading error: Reach EOF earlier than expected.");
+            }
+
             fileRead >> x >> y >> val;
 
-            if (x >= width || y >= height || fileRead.fail() || fileRead.eof()) {
+            if (x >= width || y >= height || fileRead.fail()) {
                 fileRead.close();
                 throw std::invalid_argument("Reading error: Can't coordinates.");
             }
@@ -62,8 +67,6 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
             mtx[y][x] = val;
         }
 
-        std::string end;
-        fileRead >> end;
         if (!fileRead.eof()) {
             fileRead.close();
             throw std::invalid_argument("Reading error: Didn't reach EOF when was expected.");
@@ -78,9 +81,14 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
 
         for (unsigned y = 0; y < height; ++y)
             for (unsigned x = 0; x < width; ++x) {
+                if (fileRead.eof()) {
+                    fileRead.close();
+                    throw std::invalid_argument("Reading error: Reach EOF earlier than expected.");
+                }
+
                 fileRead >> val;
 
-                if (fileRead.fail() || fileRead.eof()) {
+                if (fileRead.fail()) {
                     fileRead.close();
                     throw std::invalid_argument("Reading error: Can't read matrix value.");
                 }
@@ -90,8 +98,6 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
                 mtx[y].push_back(val);
             }
 
-        std::string end;
-        fileRead >> end;
         if (!fileRead.eof()) {
             fileRead.close();
             throw std::invalid_argument("Reading error: Didn't reach EOF when was expected.");

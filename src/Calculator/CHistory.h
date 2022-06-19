@@ -5,6 +5,11 @@
 #include <memory>
 #include "../Command/CCommand.h"
 
+/**
+ * @brief Program's Command Buffer class.
+ *
+ * By storing sequence of commands can call their undo() methods to return Receiver memory to previous state.
+ */
 class CHistory {
 public:
     CHistory();

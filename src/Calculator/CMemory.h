@@ -8,9 +8,15 @@
 #include <memory>
 #include "../Matrix/CMatrix.h"
 
+/**
+ * @brief Program's Receiver class.
+ *
+ * Stores names of available commands and matrices by their variable names, memory can be changed with public methods.
+ */
 class CMemory {
 public:
     CMemory();
+
 
     std::set<std::string> getCommandNames() const;
 
@@ -30,8 +36,6 @@ public:
 
 private:
     std::set<std::string> m_CommandNames;
-
-    std::string m_CommandInfo;
 
     std::map<std::string, std::shared_ptr<CMatrix>> m_Matrices;
 };

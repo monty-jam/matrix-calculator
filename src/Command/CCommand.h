@@ -8,6 +8,10 @@
 #include <deque>
 #include "../Calculator/CMemory.h"
 
+/**
+ * @brief Executable command parent class, each command is defined by name and list of arguments and called from CCalculator.
+ * CCommand can validate arguments and create a backup of memory that is going to change, while execution is implemented by each class child differently.
+ */
 class CCommand {
 public:
     CCommand(CMemory &memory, std::string name, std::vector<std::string> argFormat, std::string helpInfo);
