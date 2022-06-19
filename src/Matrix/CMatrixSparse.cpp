@@ -1,11 +1,12 @@
 #include "CMatrixSparse.h"
+#include "../Calculator/CCalculator.h"
 #include <fstream>
 
 CMatrixSparse::CMatrixSparse(unsigned int width, unsigned int height, unsigned int zeroes,
                              const std::vector<std::vector<double>>& matrix) : CMatrix(width, height, zeroes) {
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
-            if (matrix[y][x] != 0)
+            if (CCalculator::doubleNonEquals(matrix[y][x], 0))
                 m_Values.emplace(std::make_pair(x, y), matrix[y][x]);
 }
 
@@ -13,11 +14,16 @@ CMatrixSparse::CMatrixSparse(unsigned width, unsigned height, unsigned zeroes,
                              std::map<std::pair<unsigned, unsigned>, double>& matrix) : CMatrix(width, height, zeroes),
                              m_Values(matrix) {}
 
-void CMatrixSparse::save(std::ofstream &fileOut) const {
-    fileOut << "sparse " << m_Width << " " << m_Height << " " << m_Values.size() << "\n";
+void CMatrixSparse::save(std::string fileName) const {
+    std::ofstream fileWrite;
+    fileWrite.open(fileName);
+
+    fileWrite << "sparse " << m_Width << " " << m_Height << " " << m_Values.size() << "\n";
     for (const auto &value : m_Values)
-        fileOut << value.first.first << " " << value.first.second << " " << value.second << "\n";
-    fileOut << "end";
+        fileWrite << value.first.first << " " << value.first.second << " " << value.second << "\n";
+    fileWrite << '\0';
+
+    fileWrite.close();
 }
 
 double CMatrixSparse::at(unsigned int x, unsigned int y) const {

@@ -7,7 +7,7 @@
 
 CScan::CScan(CCalculator &calculator, CMemory &memory)
         : CCommand(memory,
-                   "scan", {"RESULT", "SIZE", "SIZE"},
+                   "scan", {"RESULT", "WIDTH", "HEIGHT"},
                    "scan the matrix of given dimensions from the input stream"),
           m_Calculator(calculator) {}
 
@@ -29,7 +29,7 @@ void CScan::execute(const std::deque<std::string> &argv, std::vector<std::string
 
             if (std::cin.eof()) {
                 m_Calculator.exit();
-                throw std::invalid_argument("Received EOF.");
+                throw std::invalid_argument("\nReceived EOF.");
             }
 
             if (std::cin.fail()) {
@@ -38,8 +38,8 @@ void CScan::execute(const std::deque<std::string> &argv, std::vector<std::string
                 throw std::invalid_argument("Invalid data type of the value.");
             }
 
-            if (fabs(val) < 0.0001) val = 0;
-            if (val == 0) zeroes++;
+            if (CCalculator::doubleEquals(val, 0))
+                zeroes++;
 
             mtx[y].push_back(val);
         }

@@ -18,7 +18,7 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const CMatrix &mtx);
 
-    virtual void save(std::ofstream &fileOut) const = 0;
+    virtual void save(std::string fileName) const = 0;
 
     virtual double at(unsigned int x, unsigned int y) const = 0;
 

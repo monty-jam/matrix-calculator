@@ -31,12 +31,12 @@ void CGem::execute(const std::deque<std::string> &argv, std::vector<std::string>
         if (y >= height || x >= width)
             break;
 
-        if (mtx[y][x] == 0) {
+        if (CCalculator::doubleEquals(mtx[y][x], 0)) {
             if (y == height - 1) // it's the last row and current is zero, so no values under the current
                 x++;
 
             for (unsigned r = y + 1; r < height; ++r) {
-                if (mtx[r][x] != 0) { // swap non-zero value up
+                if (CCalculator::doubleNonEquals(mtx[r][x], 0)) { // swap non-zero value up
                     g1(mtx, y, r);
                     detSign *= -1;
                     break;
@@ -48,12 +48,11 @@ void CGem::execute(const std::deque<std::string> &argv, std::vector<std::string>
 
         } else { // mtx[y][x] != 0
             for (unsigned r = y + 1; r < height; ++r)
-                if (mtx[r][x] != 0) // destroy non-zero value under the current
+                if (CCalculator::doubleNonEquals(mtx[r][x], 0)) // destroy non-zero value under the current
                     g3(mtx, y, r, x, width, zeroes);
 
             y++;
             x++;
-
         }
     }
 
@@ -71,16 +70,17 @@ void CGem::g3(std::vector<std::vector<double>> &mtx, unsigned y1, unsigned y2, u
               unsigned &zeroes) {
     double k = mtx[y2][x] / mtx[y1][x];
 
-    for (int c = 0; c < width; ++c) {
-        if (mtx[y1][c] != 0) {
+    for (unsigned c = 0; c < width; ++c) {
+        if (CCalculator::doubleNonEquals(mtx[y1][c], 0)) {
             double prev = mtx[y2][c];
 
             mtx[y2][c] -= mtx[y1][c] * k;
 
-            if (fabs(mtx[y2][c]) < 0.0001) mtx[y2][c] = 0;
-            if (mtx[y2][c] == 0) zeroes++; // if non-zero becomes zero
-
-            if (prev == 0 && mtx[y2][c] == 0) zeroes--; // if zero becomes non-zero
+            if (CCalculator::doubleEquals(mtx[y2][c], 0)) // if non-zero becomes zero
+                zeroes++;
+            else if (CCalculator::doubleEquals(prev, 0)
+                    && CCalculator::doubleNonEquals(mtx[y2][c], 0)) // if zero becomes non-zero
+                zeroes--;
         }
     }
 }

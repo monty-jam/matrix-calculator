@@ -30,7 +30,7 @@ void CDet::execute(const std::deque<std::string> &argv, std::vector<std::string>
         determinant *= mtx->at(x, x);
 
     if (retv.empty()) // other commands call CDet with a non-empty retv vector,
-        // so that it won't print the value, only
+        // so that it won't print the value
         std::cout << "Determinant: " << determinant << std::endl;
     retv.push_back(std::to_string(determinant));
 

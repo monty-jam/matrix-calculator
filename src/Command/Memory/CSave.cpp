@@ -12,8 +12,5 @@ std::shared_ptr<CCommand> CSave::create(CCalculator &calculator, CMemory &memory
 }
 
 void CSave::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
-    std::ofstream fileOut;
-    fileOut.open(argv[1]);
-    m_Memory.getMatrix(argv[0])->save(fileOut);
-    fileOut.close();
+    m_Memory.getMatrix(argv[0])->save(argv[1]);
 }

@@ -20,6 +20,10 @@ public:
 
     std::function< std::shared_ptr<CCommand> (CCalculator &, CMemory &) > getCommand(const std::string& name) const;
 
+    static bool doubleEquals(double lhs, double rhs);
+
+    static bool doubleNonEquals(double lhs, double rhs);
+
 private:
     std::map<std::string,
             // Function pointer that returns a shared_ptr<CCommand> and takes CCalculator& and CMemory&

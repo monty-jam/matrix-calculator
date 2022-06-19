@@ -25,11 +25,11 @@ void CMerge::execute(const std::deque<std::string> &argv, std::vector<std::strin
     for (unsigned y = 0; y < height; ++y) {
         for (unsigned x = 0; x < lhs->getWidth(); ++x) {
             mtx[y].push_back(lhs->at(x, y));
-            if (lhs->at(x,y) == 0) zeroes++;
+            if (CCalculator::doubleEquals(lhs->at(x,y), 0)) zeroes++;
         }
         for (unsigned x = 0; x < rhs->getWidth(); ++x) {
             mtx[y].push_back(rhs->at(x, y));
-            if (rhs->at(x, y) == 0) zeroes++;
+            if (CCalculator::doubleEquals(rhs->at(x,y), 0)) zeroes++;
         }
     }
 

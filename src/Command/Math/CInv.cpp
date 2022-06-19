@@ -31,7 +31,7 @@ void CInv::execute(const std::deque<std::string> &argv, std::vector<std::string>
     CDet::create(m_Calculator, m_Memory)->call({argv[1]}, detRetv);
     double determinant = std::stod(detRetv.back());
 
-    if (determinant == 0)
+    if (CCalculator::doubleEquals(determinant, 0))
         throw std::invalid_argument("Determinant equals to zero.");
 
     CAdj::create(m_Calculator, m_Memory)->call({argv[0], argv[1]}, detRetv);

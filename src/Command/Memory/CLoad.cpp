@@ -15,31 +15,35 @@ std::shared_ptr<CCommand> CLoad::create(CCalculator &calculator, CMemory &memory
 }
 
 void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) {
-    std::ifstream fileIn;
-    fileIn.open(argv[1]);
+    std::ifstream fileRead;
+    fileRead.open(argv[1]);
 
     std::string type;
     unsigned width = 0;
     unsigned height = 0;
+    unsigned zeroes = 0;
 
-    fileIn >> type >> width >> height;
+    fileRead >> type >> width >> height;
 
-    if (fileIn.fail() || fileIn.eof() || (type != "sparse" && type != "dense") || width == 0 || height == 0) {
-        fileIn.close();
-        throw std::invalid_argument("Reading file data error.");
+    if ((type != "sparse" && type != "dense") || width == 0 || height == 0 || fileRead.fail() || fileRead.eof()) {
+        fileRead.close();
+        throw std::invalid_argument("Reading error: Incorrect header.");
     }
+
+    std::vector<std::vector<double>> mtx(height);
 
     if (type == "sparse") {
         unsigned amount = 0;
 
-        fileIn >> amount;
+        fileRead >> amount;
 
-        if (fileIn.fail() || fileIn.eof()) {
-            fileIn.close();
-            throw std::invalid_argument("Reading file data error.");
+        if (fileRead.fail() || fileRead.eof()) {
+            fileRead.close();
+            throw std::invalid_argument("Reading error: Can't read amount of values in sparse matrix.");
         }
+        zeroes = width * height - amount;
 
-        std::vector<std::vector<double>> mtx(height);
+        // Fill mtx with zeroes.
         for (unsigned y = 0; y < height; ++y)
             for (unsigned x = 0; x < width; ++x) {
                 mtx[y].push_back(0);
@@ -47,56 +51,57 @@ void CLoad::execute(const std::deque<std::string> &argv, std::vector<std::string
 
         unsigned x, y;
         double val;
-        for (int i = 0; i < amount; ++i) {
-            fileIn >> x >> y >> val;
+        for (unsigned i = 0; i < amount; ++i) {
+            fileRead >> x >> y >> val;
 
-            if (x >= width || y >= height || fileIn.fail() || fileIn.eof()) {
-                fileIn.close();
-                throw std::invalid_argument("Reading file data error.");
+            if (x >= width || y >= height || fileRead.fail() || fileRead.eof()) {
+                fileRead.close();
+                throw std::invalid_argument("Reading error: Can't coordinates.");
             }
 
             mtx[y][x] = val;
         }
 
         std::string end;
-        fileIn >> end;
-
-        if (fileIn.fail() || end != "end") {
-            fileIn.close();
-            throw std::invalid_argument("Reading file data error.");
+        fileRead >> end;
+        if (!fileRead.eof()) {
+            fileRead.close();
+            throw std::invalid_argument("Reading error: Didn't reach EOF when was expected.");
         }
 
-        m_Memory.addMatrix(argv[0], CMatrix::create(width, height, width * height - amount, mtx));
+        if (zeroes <= width * height / 2)
+            std::cout << "Warning: Given sparse matrix file contains dense matrix, file rewriting is recommended."
+                      << std::endl;
 
     } else { // type == "dense"
         double val;
-        unsigned zeroes = 0;
-        std::vector<std::vector<double>> mtx(height);
 
         for (unsigned y = 0; y < height; ++y)
             for (unsigned x = 0; x < width; ++x) {
-                fileIn >> val;
+                fileRead >> val;
 
-                if (fileIn.fail() || fileIn.eof()) {
-                    fileIn.close();
-                    throw std::invalid_argument("Reading file data error.");
+                if (fileRead.fail() || fileRead.eof()) {
+                    fileRead.close();
+                    throw std::invalid_argument("Reading error: Can't read matrix value.");
                 }
 
-                if (val == 0)
+                if (CCalculator::doubleEquals(val, 0))
                     zeroes++;
                 mtx[y].push_back(val);
             }
 
         std::string end;
-        fileIn >> end;
-
-        if (fileIn.fail() || end != "end") {
-            fileIn.close();
-            throw std::invalid_argument("Reading file data error.");
+        fileRead >> end;
+        if (!fileRead.eof()) {
+            fileRead.close();
+            throw std::invalid_argument("Reading error: Didn't reach EOF when was expected.");
         }
 
-        m_Memory.addMatrix(argv[0], CMatrix::create(width, height, zeroes, mtx));
-
+        if (zeroes > width * height / 2)
+            std::cout << "Warning: Given dense matrix file contains sparse matrix, file rewriting is recommended."
+                      << std::endl;
     }
-    fileIn.close();
+
+    m_Memory.addMatrix(argv[0], CMatrix::create(width, height, zeroes, mtx));
+    fileRead.close();
 }

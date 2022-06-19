@@ -4,7 +4,7 @@
 CMul::CMul(CCalculator& calculator, CMemory& memory)
         : CCommand(memory,
                    "*", {"RESULT", "VARIABLE", "VARIABLE"},
-                   "multiply two matrices and save result to the variable"),
+                   "multiply two matrices and save to the result variable"),
           m_Calculator(calculator) {}
 
 std::shared_ptr<CCommand> CMul::create(CCalculator& calculator, CMemory& memory) {
@@ -31,8 +31,8 @@ void CMul::execute(const std::deque<std::string> &argv, std::vector<std::string>
             for (unsigned k = 0; k < lhs->getWidth(); ++k)
                 val += lhs->at(k, y) * rhs->at(x, k);
 
-            if (fabs(val) < 0.0001) val = 0;
-            if (val == 0) zeroes++;
+            if (CCalculator::doubleEquals(val, 0))
+                zeroes++;
 
             mtx[y].push_back(val);
         }

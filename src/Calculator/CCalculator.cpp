@@ -2,6 +2,7 @@
 #include <sstream>
 #include <functional>
 #include <deque>
+#include <limits>
 #include "CCalculator.h"
 #include "../Command/Basic/CHelp.h"
 #include "../Command/Basic/CExit.h"
@@ -60,7 +61,11 @@ void CCalculator::run() {
 
     while (!m_ExitFlag) {
         std::cout << "[MtxCalculator]:$ ";
-        std::getline(std::cin, m_Line);
+
+        if (!std::getline(std::cin, m_Line)) {
+            std::cout << "\nReceived EOF." << std::endl;
+            break;
+        }
 
         try {
             std::deque<std::string> argv = parseLine();
@@ -110,4 +115,12 @@ std::deque<std::string> CCalculator::parseLine() const {
 std::function<std::shared_ptr<CCommand>(CCalculator &, CMemory &)>
 CCalculator::getCommand(const std::string &name) const {
     return m_Commands.at(name);
+}
+
+bool CCalculator::doubleEquals(double lhs, double rhs) {
+    return std::abs(lhs - rhs) <= std::max(std::abs(lhs), std::abs(rhs)) * std::numeric_limits<double>::epsilon();
+}
+
+bool CCalculator::doubleNonEquals(double lhs, double rhs) {
+    return !doubleEquals(lhs, rhs);
 }

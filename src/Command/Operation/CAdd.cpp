@@ -4,7 +4,7 @@
 CAdd::CAdd(CCalculator& calculator, CMemory& memory)
         : CCommand(memory,
                    "+", {"RESULT", "VARIABLE", "VARIABLE"},
-                   "add two matrices and save result to the variable"),
+                   "add two matrices and save to the result variable"),
           m_Calculator(calculator) {}
 
 std::shared_ptr<CCommand> CAdd::create(CCalculator& calculator, CMemory& memory) {
@@ -29,8 +29,8 @@ void CAdd::execute(const std::deque<std::string> &argv, std::vector<std::string>
         for (unsigned x = 0; x < width; ++x) {
             val = lhs->at(x, y) + rhs->at(x, y);
 
-            if (fabs(val) < 0.0001) val = 0;
-            if (val == 0) zeroes++;
+            if (CCalculator::doubleEquals(val, 0))
+                zeroes++;
 
             mtx[y].push_back(val);
         }

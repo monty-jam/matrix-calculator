@@ -13,7 +13,7 @@ public:
     CMatrixSparse(unsigned width, unsigned height, unsigned zeroes,
                   std::map<std::pair<unsigned, unsigned>, double> &mtx);
 
-    void save(std::ofstream& fileOut) const override;
+    void save(std::string fileName) const override;
 
     double at(unsigned int x, unsigned int y) const override;
 

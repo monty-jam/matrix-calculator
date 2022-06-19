@@ -1,12 +1,12 @@
 #include "CCut.h"
 
-CCut::CCut(CCalculator& calculator, CMemory& memory)
+CCut::CCut(CCalculator &calculator, CMemory &memory)
         : CCommand(memory,
-                   "cut", {"RESULT", "VARIABLE", "SIZE", "SIZE", "COORDINATE", "COORDINATE"},
+                   "cut", {"RESULT", "VARIABLE", "WIDTH", "HEIGHT", "X", "Y"},
                    "cut matrix of desired dimensions from given matrix, starting from the given coordinates"),
           m_Calculator(calculator) {}
 
-std::shared_ptr<CCommand> CCut::create(CCalculator& calculator, CMemory& memory) {
+std::shared_ptr<CCommand> CCut::create(CCalculator &calculator, CMemory &memory) {
     return std::make_shared<CCut>(calculator, memory);
 }
 
@@ -26,7 +26,8 @@ void CCut::execute(const std::deque<std::string> &argv, std::vector<std::string>
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x) {
             mtx[y].push_back(mtxVar->at(x + ax, y + ay));
-            if (mtxVar->at(x + ax, y + ay) == 0) zeroes++;
+            if (CCalculator::doubleEquals(mtxVar->at(x + ax, y + ay), 0))
+                zeroes++;
         }
 
     m_Memory.addMatrix(argv[0], CMatrix::create(width, height, zeroes, mtx));

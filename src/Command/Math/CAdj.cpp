@@ -36,8 +36,8 @@ void CAdj::execute(const std::deque<std::string> &argv, std::vector<std::string>
 
             val = std::pow(-1, x + y) * std::stod(detRetv.back()); // sign of sector * determinant of current cofactor
 
-            if (fabs(val) < 0.0001) val = 0;
-            if (val == 0) zeroes++;
+            if (CCalculator::doubleEquals(val, 0))
+                zeroes++;
 
             mtx[y].push_back(val);
         }
@@ -57,7 +57,7 @@ std::shared_ptr <CMatrix> CAdj::getCofactor(const std::shared_ptr<CMatrix>& mtxV
             for (unsigned x = 0; x < width; ++x)
                 if (x != rx) {
                     mtx[my].push_back(mtxVar->at(x, y));
-                    if (mtxVar->at(x, y) == 0)
+                    if (CCalculator::doubleEquals(mtxVar->at(x, y), 0))
                         zeroes++;
                 }
 

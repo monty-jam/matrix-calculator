@@ -56,14 +56,14 @@ void CCommand::validate(const std::deque<std::string> &argv) const {
             if (!m_Memory.doesMatrixExist(argv[i]))
                 throw std::invalid_argument("Variable is not found.");
 
-        } else if (m_ArgFormat[i] == "SIZE") {
+        } else if (m_ArgFormat[i] == "WIDTH" || m_ArgFormat[i] == "HEIGHT") { // Size value
             double val = std::stod(argv[i]);
             if (floor(val) != ceil(val))
                 throw std::invalid_argument("Size value is not int.");
             if (val <= 0)
                 throw std::invalid_argument("Size value is less than or equals to 0.");
 
-        } else if (m_ArgFormat[i] == "COORDINATE") {
+        } else if (m_ArgFormat[i] == "X" || m_ArgFormat[i] == "Y") { // Coordinate value
             double val = std::stod(argv[i]);
             if (floor(val) != ceil(val))
                 throw std::invalid_argument("Coordinate value is not int.");

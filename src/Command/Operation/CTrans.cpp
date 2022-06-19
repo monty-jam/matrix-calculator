@@ -3,7 +3,7 @@
 CTrans::CTrans(CCalculator& calculator, CMemory& memory)
         : CCommand(memory,
                    "T", {"RESULT", "VARIABLE"},
-                   "transpose given matrix and save result to the variable"),
+                   "transpose given matrix and save to the result variable"),
           m_Calculator(calculator) {}
 
 std::shared_ptr<CCommand> CTrans::create(CCalculator& calculator, CMemory& memory) {
