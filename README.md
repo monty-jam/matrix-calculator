@@ -34,20 +34,31 @@ Rozšíření zadání:
 
 ## Polymorfismus
 Polymorfismus je aplikovaný v:
-*  Typy matic, husté a řídké
+* **Typy matic, husté a řídké**
+* Třídy `CMatrixDense` a `CMatrixSparse` se dědí od rodiče `CMatrix`, táto hierarchie je vytvořena pro
+  efektivní paměťovou reprezentaci matic. `CMatrixDense` chrání všechny hodnoty v double vectoru hodnot, ale
+  `CMatrixSparse` může mít hodně nulových hodnot, proto chrání jenom nenulové hodnoty v mapě s
+  klíčem souřadnice.
 
-* Command Pattern, implementace příkazů
+
+* **Command Pattern, hierarchie příkazů**
+* Ten návrh byl inspirován popisem Command Patternu ze zdroje:
+  `https://refactoring.guru/design-patterns/command`
+* V mém projektu Client a Receiver reprezentovány třídy `CCalculator` a `CMemory`. Client čte požadavky
+  uživatele ze vstupu a z nich vytvoří instanci příkazů, které pak jsou vykonány a unikátně získává/mění
+  data v Receiveru (podtřídy `CCommand` implementují polymorfní metodu execute). Příkazy se ukládají do `CHistory` bufferu. Pomocí této uložené sekvence lze snadno
+  implementovat příkaz `CUndo`.
 
 ## Připomínky k použití programu
-1. žádné argumenty ze vstupu uživatele nesmí se začínat symbolem `~` *(takové názvy
-argumentů jsou rezervovány pro volání příkazů jinými příkazy, aby pak oni nepřepisovali proměnné, využité uživatelem)*
+1. žádné argumenty ze vstupu uživatele nesmí se začínat symbolem `~` (takové názvy
+argumentů jsou rezervovány pro volání příkazů jinými příkazy, aby pak oni nepřepisovali proměnné, využité uživatelem)
 2. proměnné matic nesmí se jmenovat jako názvy dostupných příkazů
 3. EOF při načítání příkazu nebo matice ze vstupu ukončí program
-4. soubor s uloženou matici nesmí mít žádné whitespacy po poslední očekávané hodnotě, jinak načtení ze souboru selže *(ostatní whitespacy jsou ignorovany)*
+4. soubor s uloženou matici nesmí mít žádné whitespacy po poslední očekávané hodnotě, jinak načtení ze souboru selže (ostatní whitespacy jsou ignorovany)
 
 ## Diagram tříd
 <div align="center">
-   <img src="popovle1_diagram.png"/>
+   <img src="popovle1_diagram.png" alt=""/>
 </div>
 
 ## Dostupné příkazy
