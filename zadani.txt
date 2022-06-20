@@ -1,21 +1,57 @@
 # Maticová kalkulačka
+Naprogramuju maticovou kalkulačku, podporující několik maticových operací. Komunikace uživatele bude realizována přes terminál.
 
-Naprogramuju maticovou kalkulačku, podporující několik maticových operací. Komunikace uživatele bude realizovana přes terminal a připravéné příkazy. Taky bude možné ukladat spočítané matice do souborů, a načítat jich ze souborů.
+## Zadání z Progtestu
+Vytvořte aplikaci implementující maticovou kalkulačku.
+
+Kalkulačka musí implementovat:
+
+1. práci s maticemi různé velikosti
+2. základní operace: sčítání, odčítání, násobení, transpozice
+3. sloučení (3x3 sloučeno s 3x3 => matice 6x3) a oříznutí (např. pouze levá polovina matice 6x3 => levá 3x3)
+4. pro čtvercové matice navíc výpočet inverze
+5. efektivní paměťovou reprezentaci (pro řídké matice se nehodí 2D pole, pro husté matice naopak)
+6. funkce pro výpočet determinantu, určení hodnosti, Gaussova eliminační metoda
+7. proměnné (uložení matice do proměnné, načítání matice ze vstupu, využití proměnné ve výpočtu)
+8. uložení matice (v efektivní reprezentaci) do souboru a její načtení ze souboru
+
+## Vlastní implementace
+Kalkulačka má implementováno:
+
+1. práce s maticemi různé velikosti
+2. základní operace: sčítání, odčítání, násobení, transpozice `CAdd, CSub, CMul, CTrans`
+3. horizontální sloučení `CMerge` a oříznutí `CCut`
+4. pro čtvercové matice navíc výpočet inverze `CInv`
+5. efektivní paměťová reprezentace `CMatrix, CMatrixDense, CMatrixSparse`
+6. funkce pro výpočet determinantu, určení hodnosti, Gaussova eliminační metoda `CDet, CRank, CGem`
+7. proměnné, uložení matice do proměnné, načítání matice ze vstupu `CScan`, využití proměnné ve výpočtu
+8. uložení matice v efektivní reprezentaci do souboru a její načtení ze souboru `CSave, CLoad`
+
+Rozšíření zadání:
+
+9. výpočet adjungované matice `CAdj`
+10. zrušení vykonání posledního příkazu `CUndo, CHistory`
+
+## Polymorfismus
+Polymorfismus je aplikovaný v:
+* **Typy matic, husté a řídké**
+* Třídy `CMatrixDense` a `CMatrixSparse` se dědí od rodiče `CMatrix`, táto hierarchie je vytvořena pro
+  efektivní paměťovou reprezentaci matic. `CMatrixDense` chrání všechny hodnoty v double vectoru hodnot, ale
+  `CMatrixSparse` může mít hodně nulových hodnot, proto chrání jenom nenulové hodnoty v mapě s
+  klíčem souřadnice.
 
 
-## Dostupné operace s maticemi
-* Sčítání
-* Odčítání
-* Násobení
-* Transpozice
-* Horizontální sloučení
-* Oříznutí
-* Inverze (pro čtvercové matice)
-* Výpočet determinantu
-* Určení hodnosti
-* Gaussova Eliminační Metoda
-* Gaussova Eliminační Metoda s komentářem
+* **Command Pattern, hierarchie příkazů**
+* Ten návrh byl inspirován popisem Command Patternu ze zdroje:
+  `https://refactoring.guru/design-patterns/command`
+* V mém projektu Client a Receiver reprezentovány třídy `CCalculator` a `CMemory`. Client čte požadavky
+  uživatele ze vstupu a z nich vytvoří instanci příkazů, které pak jsou vykonány a unikátně získává/mění
+  data v Receiveru (podtřídy `CCommand` implementují polymorfní metodu execute). Příkazy se ukládají do `CHistory` bufferu. Pomocí této uložené sekvence lze snadno
+  implementovat příkaz `CUndo`.
 
-Polymorfismus byl použit pro různé typy matic:
-* husté (hodnoty uloženy do 2D pole)
-* řídké (hodnoty uloženy do mapy koordinat a hodnot, protože řídké matice obsahují přiliš hodně nulových hodnot, které není nutně zachovat)
+## Připomínky k použití programu
+1. žádné argumenty ze vstupu uživatele nesmí se začínat symbolem `~` (takové názvy
+argumentů jsou rezervovány pro volání příkazů jinými příkazy, aby pak oni nepřepisovali proměnné, využité uživatelem)
+2. proměnné matic nesmí se jmenovat jako názvy dostupných příkazů
+3. EOF při načítání příkazu nebo matice ze vstupu ukončí program
+4. soubor s uloženou matici nesmí mít žádné whitespacy po poslední očekávané hodnotě, jinak načtení ze souboru selže (ostatní whitespacy jsou ignorovany)
