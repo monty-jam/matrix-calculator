@@ -42,6 +42,7 @@ public:
      *
      * @param argv Argument Vector with a result variable and variable of matrix to get inverse from.
      * @param retv Return Vector, no usage.
+     * @throw std::invalid_argument if matrix is not square.
      */
     void execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) override;
 

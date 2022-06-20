@@ -28,6 +28,8 @@ public:
      * Run of program represented as a loop of getting the user's command from input and calling it with gotten
      * arguments (exceptions from command call will be catched and printed). Write commands will be added to the
      * CHistory's deque.
+     *
+     * @note When getting EOF while parsing the user command, exits the program.
      */
     void run();
 
@@ -37,7 +39,7 @@ public:
     void exit();
 
     /**
-     * @brief
+     * @brief Changes the Command Buffer history, and restores the backup of the last called command.
      */
     void undo();
 

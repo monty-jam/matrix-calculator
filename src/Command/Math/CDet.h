@@ -43,6 +43,7 @@ public:
      *
      * @param argv Argument Vector with a variable of square matrix to calculate determinant from.
      * @param retv Return Vector, result will be printed to output stream if empty. Determinant of matrix will be added.
+     * @throw std::invalid_argument if matrix is not square.
      */
     void execute(const std::deque<std::string> &argv, std::vector<std::string> &retv) override;
 
