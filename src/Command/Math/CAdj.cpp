@@ -6,7 +6,7 @@
 CAdj::CAdj(CCalculator &calculator, CMemory &memory)
         : CCommand(memory,
                    "adj", {"RESULT", "VARIABLE"},
-                   "calculate the adjugate of a given matrix"),
+                   "calculate the adjugate of a given square matrix"),
           m_Calculator(calculator) {}
 
 std::shared_ptr<CCommand> CAdj::create(CCalculator &calculator, CMemory &memory) {

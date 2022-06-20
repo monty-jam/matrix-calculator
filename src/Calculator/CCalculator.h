@@ -26,7 +26,8 @@ public:
      * @brief Method called by main, starts the program.
      *
      * Run of program represented as a loop of getting the user's command from input and calling it with gotten
-     * arguments (exceptions from command call will be catched and printed)
+     * arguments (exceptions from command call will be catched and printed). Write commands will be added to the
+     * CHistory's deque.
      */
     void run();
 

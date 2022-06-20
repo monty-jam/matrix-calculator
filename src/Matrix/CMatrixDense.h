@@ -52,7 +52,7 @@ public:
      * Creates a new instance of CMatrixDense, and fills its rows with original columns, which results in transposed
      * matrix.
      *
-     * @return Shared pointer of new CMatrixDense instance, transposed from original.
+     * @return CMatrix shared pointer to new CMatrixDense instance, transposed from original.
      */
     std::shared_ptr<CMatrix> transpose() const override;
 

@@ -8,7 +8,7 @@
 CInv::CInv(CCalculator &calculator, CMemory &memory)
         : CCommand(memory,
                    "inv", {"RESULT", "VARIABLE"},
-                   "calculate the inverse of a given matrix"),
+                   "calculate the inverse of a given square matrix"),
           m_Calculator(calculator) {}
 
 std::shared_ptr<CCommand> CInv::create(CCalculator &calculator, CMemory &memory) {

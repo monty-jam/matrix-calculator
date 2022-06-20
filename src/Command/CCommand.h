@@ -63,6 +63,8 @@ protected:
     /**
      * @brief Executes the command instructions, which are implemented in CCommand subclasses.
      *
+     * @note Syntax of given arguments in argv shouldn't be checked in implementation, because it is already checked by
+     * validate method.
      * @param argv Arguments Vector from user input.
      * @param retv Return Vector, used to call commands inside another commands and send values to each other.
      */
@@ -119,11 +121,11 @@ private:
     void print(std::ostream &os) const;
 
     /**
-     * @brief
+     * @brief Operator for printing the command to the output stream.
      *
-     * @param os
-     * @param cmd
-     * @return
+     * @param os Output stream to which command details will be printed.
+     * @param cmd Command that needs to be printed.
+     * @return Same output stream but with a command details printed.
      */
     friend std::ostream &operator<<(std::ostream &os, const CCommand &cmd);
 };
