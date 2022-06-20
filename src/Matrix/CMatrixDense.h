@@ -50,10 +50,10 @@ public:
     /**
      * @brief Transposes dense matrix.
      *
-     * Creates a new instance of CMatrixDense, and fills its rows with original columns, which results in transposed
+     * Creates a new object of CMatrixDense, and fills its rows with original columns, which results in transposed
      * matrix.
      *
-     * @return CMatrix shared pointer to new CMatrixDense instance, transposed from original.
+     * @return CMatrix shared pointer to new CMatrixDense object, transposed from original.
      */
     std::shared_ptr<CMatrix> transpose() const override;
 

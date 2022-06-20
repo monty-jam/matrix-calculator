@@ -10,7 +10,7 @@
 class CHelpCmd : public CCommand {
 public:
     /**
-     * @brief Constructs Help-Cmd Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Help-Cmd Command and links it with CCalculator and CMemory objects.
      *
      * First argument - name of a command, which needs to be written.
      *
@@ -20,11 +20,11 @@ public:
     CHelpCmd(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CHelpCmd instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CHelpCmd object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CHelpCmd instance.
+     * @return CCommand shared pointer to a new CHelpCmd object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -41,7 +41,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

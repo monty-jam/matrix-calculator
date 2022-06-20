@@ -26,7 +26,7 @@ public:
     virtual ~CMatrix();
 
     /**
-     * @brief Creates an instance of a CMatrix child (CMatrixDense or CMatrixSparse).
+     * @brief Creates an object of a CMatrix child (CMatrixDense or CMatrixSparse).
      *
      * Choice of an inherited child class (CMatrixDense or CMatrixSparse) depends on amount of zero values to all
      * values. Method is static, so it is used inside commands' implementations.
@@ -36,7 +36,7 @@ public:
      * @param zeroes Amount of zero values in matrix.
      * @param mtx Double vector of matrix values (inner vectors are columns in one row from left to right, outer vectors
      * are rows downwards).
-     * @return Shared pointer on a created instance of CMatrix child.
+     * @return Shared pointer on a created object of CMatrix child.
      */
     static std::shared_ptr<CMatrix> create(unsigned width, unsigned height, unsigned zeroes,
                                            const std::vector<std::vector<double>> &mtx);
@@ -108,7 +108,7 @@ public:
      *
      * Implemented by inherited classes because of different memory representation.
      *
-     * @return Shared pointer on a new instance of transposed matrix.
+     * @return Shared pointer on a new object of transposed matrix.
      */
     virtual std::shared_ptr<CMatrix> transpose() const = 0;
 

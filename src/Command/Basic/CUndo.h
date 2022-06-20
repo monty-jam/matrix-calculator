@@ -10,7 +10,7 @@
 class CUndo : public CCommand {
 public:
     /**
-     * @brief Constructs Undo Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Undo Command and links it with CCalculator and CMemory objects.
      *
      * Undo Command doesn't contain any arguments.
      *
@@ -20,11 +20,11 @@ public:
     CUndo(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CUndo instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CUndo object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CUndo instance.
+     * @return CCommand shared pointer to a new CUndo object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -41,7 +41,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

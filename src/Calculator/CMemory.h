@@ -16,7 +16,7 @@
 class CMemory {
 public:
     /**
-     * @brief Constructs a Receiver instance.
+     * @brief Constructs a Receiver object.
      */
     CMemory();
 

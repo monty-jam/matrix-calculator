@@ -61,10 +61,10 @@ public:
     /**
      * @brief Transposes sparse matrix.
      *
-     * Creates a new instance of CMatrixSparse, and swaps rows and columns of each value of original matrix, what
+     * Creates a new object of CMatrixSparse, and swaps rows and columns of each value of original matrix, what
      * results in transposed matrix.
      *
-     * @return CMatrix shared pointer to new CMatrixSparse instance, transposed from original.
+     * @return CMatrix shared pointer to new CMatrixSparse object, transposed from original.
      */
     std::shared_ptr<CMatrix> transpose() const override;
 

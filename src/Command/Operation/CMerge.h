@@ -10,7 +10,7 @@
 class CMerge : public CCommand {
 public:
     /**
-     * @brief Constructs Merge Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Merge Command and links it with CCalculator and CMemory objects.
      *
      * First argument - name of a result variable, where the merged matrix will be written.
      * Second argument - variable name of left matrix.
@@ -22,11 +22,11 @@ public:
     CMerge(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CMerge instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CMerge object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CMerge instance.
+     * @return CCommand shared pointer to a new CMerge object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -46,7 +46,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

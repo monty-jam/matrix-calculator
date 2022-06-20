@@ -10,7 +10,7 @@
 class CLoad : public CCommand {
 public:
     /**
-     * @brief Constructs Load Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Load Command and links it with CCalculator and CMemory objects.
      *
      * First argument - Name of a result variable where matrix will be written.
      * Second argument - Path to the readable file.
@@ -21,11 +21,11 @@ public:
     CLoad(CCalculator &calculator, CMemory &memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CLoad instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CLoad object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CLoad instance.
+     * @return CCommand shared pointer to a new CLoad object.
      */
     static std::shared_ptr<CCommand> create(CCalculator &calculator, CMemory &memory);
 
@@ -55,7 +55,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator &m_Calculator;
 };

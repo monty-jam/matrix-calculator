@@ -18,10 +18,10 @@
 class CCommand {
 public:
     /**
-     * @brief Constructs command with given details, links it with CMemory Receiver instance, and sets the m_IsWrite
+     * @brief Constructs command with given details, links it with CMemory Receiver object, and sets the m_IsWrite
      * flag (command is Write if it overwrites/creates the result variable, or if it's a delete command).
      *
-     * @param memory instance of Receiver class.
+     * @param memory object of Receiver class.
      * @param name Command name.
      * @param argFormat Vector of command arguments' types.
      * @param helpInfo Detailed command description.
@@ -56,7 +56,7 @@ public:
 
 protected:
     /**
-     * @brief Reference to CMemory Receiver instance.
+     * @brief Reference to CMemory Receiver object.
      */
     CMemory &m_Memory;
 

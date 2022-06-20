@@ -11,7 +11,7 @@
 class CExit : public CCommand {
 public:
     /**
-     * @brief Constructs Exit Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Exit Command and links it with CCalculator and CMemory objects.
      *
      * Exit Command doesn't contain any arguments.
      *
@@ -21,11 +21,11 @@ public:
     CExit(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CExit instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CExit object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CExit instance.
+     * @return CCommand shared pointer to a new CExit object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -41,7 +41,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

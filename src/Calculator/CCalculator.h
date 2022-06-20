@@ -11,14 +11,14 @@
 /**
  * @brief Program's Client class.
  *
- * Contains instances of CMemory (Receiver) and CHistory (Command Buffer), reads commands from input and calls them,
+ * Contains objects of CMemory (Receiver) and CHistory (Command Buffer), reads commands from input and calls them,
  * catches exceptions inside commands' calls. Has static methods for relative comparison of doubles.
  */
 class CCalculator {
 public:
     /**
-     * @brief Constructs a Client instance, initializes all available commands in the program to the m_Commands map,
-     * also saves command names to m_Memory Receiver instance.
+     * @brief Constructs a Client object, initializes all available commands in the program to the m_Commands map,
+     * also saves command names to m_Memory Receiver object.
      */
     CCalculator();
 

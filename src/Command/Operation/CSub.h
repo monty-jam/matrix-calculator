@@ -11,7 +11,7 @@
 class CSub : public CCommand {
 public:
     /**
-     * @brief Constructs Subtract Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Subtract Command and links it with CCalculator and CMemory objects.
      *
      * First argument - Name of a result variable, where the difference will be written.
      * Second argument - Variable name of first matrix.
@@ -23,11 +23,11 @@ public:
     CSub(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CSub instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CSub object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CSub instance.
+     * @return CCommand shared pointer to a new CSub object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -47,7 +47,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

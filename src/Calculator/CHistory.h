@@ -13,7 +13,7 @@
 class CHistory {
 public:
     /**
-     * @brief Constructs a Command Buffer instance.
+     * @brief Constructs a Command Buffer f.
      */
     CHistory();
 

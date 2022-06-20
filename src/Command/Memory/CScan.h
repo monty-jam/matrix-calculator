@@ -10,7 +10,7 @@
 class CScan : public CCommand {
 public:
     /**
-     * @brief Constructs Scan Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Scan Command and links it with CCalculator and CMemory objects.
      *
      * First argument - Name of a result variable where scanned matrix will be saved.
      * Second argument - Width of new matrix.
@@ -22,11 +22,11 @@ public:
     CScan(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CScan instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CScan object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CScan instance.
+     * @return CCommand shared pointer to a new CScan object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -46,7 +46,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

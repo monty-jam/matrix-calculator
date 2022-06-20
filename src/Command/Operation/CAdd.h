@@ -11,7 +11,7 @@
 class CAdd : public CCommand {
 public:
     /**
-     * @brief Constructs Add Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Add Command and links it with CCalculator and CMemory objects.
      *
      * First argument - Name of a result variable, where the sum will be written.
      * Second argument - Variable name of first matrix.
@@ -23,11 +23,11 @@ public:
     CAdd(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CAdd instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CAdd object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CAdd instance.
+     * @return CCommand shared pointer to a new CAdd object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -46,7 +46,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

@@ -11,7 +11,7 @@
 class CTrans : public CCommand {
 public:
     /**
-     * @brief Constructs Transpose Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Transpose Command and links it with CCalculator and CMemory objects.
      *
      * First argument - name of a result variable, where the transposed matrix will be written.
      * Second argument - variable name of matrix to be transposed.
@@ -22,11 +22,11 @@ public:
     CTrans(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CTrans instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CTrans object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CTrans instance.
+     * @return CCommand shared pointer to a new CTrans object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
@@ -43,7 +43,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };

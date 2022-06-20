@@ -11,7 +11,7 @@
 class CVars : public CCommand {
 public:
     /**
-     * @brief Constructs Vars Command and links it with CCalculator and CMemory instances.
+     * @brief Constructs Vars Command and links it with CCalculator and CMemory objects.
      *
      * Vars Command doesn't contain any arguments.
      *
@@ -21,16 +21,16 @@ public:
     CVars(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Static method to create and get a CCommand shared pointer to a new CVars instance.
+     * @brief Static method to create and get a CCommand shared pointer to a new CVars object.
      *
      * @param calculator Client class.
      * @param memory Receiver class.
-     * @return CCommand shared pointer to a new CVars instance.
+     * @return CCommand shared pointer to a new CVars object.
      */
     static std::shared_ptr<CCommand> create(CCalculator& calculator, CMemory& memory);
 
     /**
-     * @brief Prints all stored variables with matrices in CMemory instance to the output stream.
+     * @brief Prints all stored variables with matrices in CMemory object to the output stream.
      *
      * @param argv Argument Vector, must be empty.
      * @param retv Return Vector, no usage.
@@ -39,7 +39,7 @@ public:
 
 private:
     /**
-     * @brief Reference to CCalculator Client instance.
+     * @brief Reference to CCalculator Client object.
      */
     CCalculator& m_Calculator;
 };
