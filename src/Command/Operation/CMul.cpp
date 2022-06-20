@@ -15,6 +15,7 @@ void CMul::execute(const std::deque<std::string> &argv, std::vector<std::string>
     std::shared_ptr<CMatrix> lhs = m_Memory.getMatrix(argv[1]);
     std::shared_ptr<CMatrix> rhs = m_Memory.getMatrix(argv[2]);
 
+    // Matrices multiplication is not commutative!
     if (lhs->getWidth() != rhs->getHeight())
         throw std::invalid_argument("Incorrect matrices' dimensions.");
 

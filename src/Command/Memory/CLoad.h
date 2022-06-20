@@ -41,8 +41,8 @@ public:
      * For dense matrices, command reads all "width * height" values by rows left to right, after that expects the end
      * of file.
      *
-     * Reading from file ignores all blank spaces, except after the last expected value, there shouldn't be any blank
-     * symbols or other unexpected values, otherwise the file data will be invalid.
+     * Reading from file ignores all whitespaces, except after the last expected value, there shouldn't be any
+     * whitespaces or other unexpected values, otherwise the file data will be invalid.
      *
      * @note Prints the warning to the output stream, if file stores data about one type in other type formatting, so it
      * becomes not memory-wise effective.

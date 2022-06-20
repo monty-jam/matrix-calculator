@@ -43,6 +43,7 @@ public:
      * Resulting file will contain header with matrix type (sparse) and values of width, height, and amount of values.
      * Then there will be stored each value on a new line in a format "column", "row" and "value".
      *
+     * @note There shouldn't be any whitespaces after the last saved value, else loading will fail.
      * @param filePath Path, where sparse matrix data will be saved (guaranteed to be valid by CCommand validation).
      */
     void save(std::string filePath) const override;

@@ -32,6 +32,7 @@ public:
      * Resulting file will contain header with matrix type (dense) values of width and height. Then there will be
      * stored all the "width * height" values of dense matrix, every row by a new line.
      *
+     * @note There shouldn't be any whitespaces after the last saved value, else loading will fail.
      * @param filePath Path, where dense matrix data will be saved (guaranteed to be valid by CCommand validation).
      */
     void save(std::string filePath) const override;

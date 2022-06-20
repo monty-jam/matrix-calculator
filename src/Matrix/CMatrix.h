@@ -75,6 +75,7 @@ public:
      *
      * Implemented by inherited classes because of different memory representation.
      *
+     * @note There shouldn't be any whitespaces after the last saved value, else loading will fail.
      * @param x Column number (from left to right).
      * @param y Row number (downwards).
      * @return Matrix value in given coordinates.
